@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class Carona implements Comparable<Carona> {
+public class Carona{
  private String origem="";
  private String destino="";
  private String idCarona="";
@@ -208,25 +208,6 @@ private void checaHoraEData(String data, String hora) {
 public String getTrajeto() {
 	return this.origem + " - " + this.destino;
 }
-@Override
-public int compareTo(Carona o) {
-	if(o.getData().toString().compareTo(data.toString())>0){
-		return -1;
-	}
-	else if(o.getData().toString().compareTo(data.toString())==0){
-		if(o.getHora().toString().compareTo(o.toString())>0){
-			return -1;
-		}
-	}
-	if(o.getData().toString().compareTo(data.toString())<0){
-		return 1;
-	}
-	else if(o.getData().toString().compareTo(data.toString())==0){
-		if(o.getHora().toString().compareTo(o.toString())<0){
-			return 1;
-		}
-	}
-	return 0;
-}
+
 
 }

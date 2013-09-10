@@ -2,7 +2,11 @@ package Controller;
 
 
 import java.util.List;
+
 import javax.naming.directory.InvalidAttributeIdentifierException;
+
+import Model.Carona;
+import Model.Solicitacao;
 
 public class ControllerGeral {
 
@@ -55,14 +59,7 @@ public class ControllerGeral {
 		return this.caronas.buscaCarona(origem, destino);
 	}
 	
-	private void verificaSessao(String idUsuario){
-		if(idUsuario== null || idUsuario.isEmpty()){
-			throw new IllegalAccessError( "Sessão inválida");
-		}
-		else if(!(this.usuarios.getUsuarioSistema().containsKey(idUsuario))){
-			throw new IllegalAccessError("Sessão inexistente");
-		}
-	}
+	
 	public String addPonto(String pontos, String idUser, String idCarona){
 		return this.caronas.addPonto(pontos, idUser, idCarona);
 	}
@@ -98,6 +95,33 @@ public class ControllerGeral {
 	public void desistirRequisicao(String idSessao, String idCarona, String idSolicitacao ){
 		this.solicitacaoes.desistirRequisicao(this.usuarios.getUsuarioSistema().get(idSessao), this.caronas.getCaronaDoSistema().get(idCarona), idSolicitacao);
 	}
+	
+	public List<Carona> montaListaDeCarona(String idUser){
+		return this.caronas.fazListaCaronaUser(this.usuarios.getUsuarioSistema().get(idUser));
+	}
+	
+	public List<Solicitacao> montaListaDeSolicitacaoFeitas(String idUser){
+		return this.solicitacaoes.fazerListaSolicitacoesFeitas(this.usuarios.getUsuarioSistema().get(idUser));
+		
+	}
+	
+	public List<Solicitacao> montaListaDeSolicitacaoRecebidas(String idUser){
+		return this.solicitacaoes.fazerListaSolicitacoesRecebidas(this.usuarios.getUsuarioSistema().get(idUser));
+	}
+	
+	public List<Carona> transformaListaDeIdCaronaEmListaDeCarona(List<String> idCaronas){
+		return this.caronas.transformaListaDeIdCaronaEmListaDeCarona(idCaronas);
+	}
+	
+	private void verificaSessao(String idUsuario){
+		if(idUsuario== null || idUsuario.isEmpty()){
+			throw new IllegalAccessError( "Sessão inválida");
+		}
+		else if(!(this.usuarios.getUsuarioSistema().containsKey(idUsuario))){
+			throw new IllegalAccessError("Sessão inexistente");
+		}
+	}
+	
 
 
 

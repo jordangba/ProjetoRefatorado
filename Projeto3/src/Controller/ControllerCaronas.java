@@ -1,8 +1,8 @@
 package Controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
 
 import Model.Carona;
 import Model.PontoEncontro;
@@ -11,12 +11,10 @@ import Model.Usuario;
 public class ControllerCaronas {
 
 	private Map<String,Carona> caronaDoSistema;
-	private String datAtual="";
-	private String horAtual="";
+
 	
 	public ControllerCaronas(){
 		this.caronaDoSistema= new HashMap<String, Carona>();
-		criaDataEHoraAtual();
 	}
 	
 	
@@ -135,36 +133,25 @@ public class ControllerCaronas {
 		}
 		
 	}
-	private void criaDataEHoraAtual(){
-		setDatAtual(new SimpleDateFormat("dd/MM/yyyy").format(Calendar
-				.getInstance().getTime()));
-		
-		setHorAtual(new SimpleDateFormat("HH:mm").format(Calendar
-				.getInstance().getTime()));
-	}
 	
-	public String getDatAtual() {
-		return datAtual;
-	}
-
-
-	public void setDatAtual(String datAtual) {
-		this.datAtual = datAtual;
-	}
-
-
-	public String getHorAtual() {
-		return horAtual;
-	}
-
-
-	public void setHorAtual(String horAtual) {
-		this.horAtual = horAtual;
-	}
-
-
+	
 	public Map<String, Carona> getCaronaDoSistema() {
 		return caronaDoSistema;
+	}
+	
+	private boolean verificaDataDaCarona(Carona carona){
+		Calendar data = Calendar.getInstance();
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+			formato.setLenient(false);
+			try {
+				data.setTime(formato.parse(carona.getData()));
+			} catch (ParseException e) {
+			}
+			Calendar dataAtual = Calendar.getInstance();
+			if (dataAtual.getTime().compareTo(data.getTime()) == 1) { 
+				return false;
+			}
+			return true;
 	}
 	public List<String> buscaCarona(String origem, String destino){
 		List<String> resultado = new ArrayList<String>();
@@ -175,18 +162,23 @@ public class ControllerCaronas {
 					resultado.add(carona.getIdCarona());			
 			 }
 			 else if(origem.isEmpty() && carona.getDestino().toLowerCase().equals(destino.toLowerCase())){
-						 resultado.add(carona.getIdCarona());
+				 if(verificaDataDaCarona(carona)){
+					 resultado.add(carona.getIdCarona());					 
+				 }
 	 
 			 }			 			 
 			 else if (carona.getOrigem().toLowerCase().equals(origem.toLowerCase()) && destino.isEmpty()){
-						 resultado.add(carona.getIdCarona());		
+				 if(verificaDataDaCarona(carona)){
+					 resultado.add(carona.getIdCarona());					 
+				 }		
 
 			 }
 			 else {
 				 if(carona.getOrigem().toLowerCase().equals(origem.toLowerCase())){
 					 if(carona.getDestino().toLowerCase().equals(destino.toLowerCase())){
-
-							 resultado.add(carona.getIdCarona());						 
+						 if(verificaDataDaCarona(carona)){
+							 resultado.add(carona.getIdCarona());					 
+						 }						 
 					 }
 			 }
 			 }	
@@ -194,6 +186,14 @@ public class ControllerCaronas {
 		Collections.sort(resultado);
 		return resultado;
 }
+	
+	public List<Carona> transformaListaDeIdCaronaEmListaDeCarona(List<String> idCaronas){
+		List<Carona> resultado= new ArrayList<Carona>();
+		for (String carona : idCaronas) {
+			resultado.add(this.caronaDoSistema.get(carona));
+		}
+		return resultado;
+	}
 	
 	public String addPonto(String pontos, String idUser, String idCarona){
 		PontoEncontro p = new PontoEncontro(pontos, idUser, idCarona);

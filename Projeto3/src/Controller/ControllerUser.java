@@ -104,4 +104,5 @@ public class ControllerUser {
 		this.logado= new Usuario();
 
 	}
+	
 }
