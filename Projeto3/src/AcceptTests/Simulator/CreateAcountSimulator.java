@@ -78,6 +78,22 @@ public class CreateAcountSimulator {
 	
 	public void desistirRequisicao(String idSessao, String idCarona, String idSolicitacao ){
 		this.control.desistirRequisicao(idSessao, idCarona, idSolicitacao);
+		
+	}
+	public void reviewCarona(String idSessao, String idCarona,String review){
+		this.control.reviewCarona(idSessao, idCarona, review);
+	}
+	
+	public void reviewVagaEmCarona(String idSessao, String idCarona, String login,String review){
+		this.control.reviewVagaEmCarona(idSessao, idCarona, login,review);
+	}
+	
+	public String visualizarPerfil(String idSessao, String login){
+		return this.control.visualizarPerfil(idSessao, login);
+	}
+	
+	public String getAtributoPerfil(String login, String atributo){
+		return this.control.getAtributoPerfil(login, atributo);
 	}
 	public void  encerrarSessao(String login) {
 		control.encerrarSessao();

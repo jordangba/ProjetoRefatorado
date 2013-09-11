@@ -58,6 +58,8 @@ public class Solicitacao {
 			int vagas= carona.getVagas()-1;
 			carona.setVagas(vagas);
 			this.estado=estado.mudaEstadoAceitacao(this.estado);
+			donoDaSolicitacao.getSolicitacoesAceitas().add(carona.getIdCarona());
+			donoDaSolicitacao.getSolicitacoesFeitas().remove(idSolicitacao);
 		}
 		else{
 			throw new IllegalComponentStateException("Solicitação inexistente");
@@ -117,4 +119,7 @@ public class Solicitacao {
 	public Usuario getDonoCarona() {
 		return donoCarona;
 	}
+	
+
+	
 }

@@ -18,6 +18,10 @@ public class RunTestAccept {
 		files.add("src/AcceptTests/CreateAcount/US03.txt");
 		files.add("src/AcceptTests/CreateAcount/US04.txt");
 		files.add("src/AcceptTests/CreateAcount/US05.txt");
+		files.add("src/AcceptTests/CreateAcount/US06.txt");		
+		files.add("src/AcceptTests/CreateAcount/US08.txt");
+		files.add("src/AcceptTests/CreateAcount/US09.txt");
+
 
 		CreateAcountSimulator fachada = new CreateAcountSimulator();
 

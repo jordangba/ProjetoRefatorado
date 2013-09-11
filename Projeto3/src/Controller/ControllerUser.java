@@ -105,4 +105,51 @@ public class ControllerUser {
 
 	}
 	
+	public void reviewCarona(String idSessao, String idCarona, String review, String login){
+		this.usuarioSistema.get(idSessao).reviewCarona(idCarona, review, this.usuarioSistema.get(login) );
+	}
+	public void reviewVagaEmCarona(String idSessao, String idCarona, String review, String login){
+		this.usuarioSistema.get(idSessao).reviewVagaEmCarona(idCarona, review, this.usuarioSistema.get(login));
+	}
+	
+	public String visualizarPerfil(String idSessao, String login){
+		return this.usuarioSistema.get(idSessao).visualizarPerfil(login);
+	}
+	
+	public String getAtributoPerfil(String login, String atributo){
+		String retorno=""; 
+		if(atributo.equals("nome")){
+			retorno = this.usuarioSistema.get(login).getNome();
+		}
+		else if(atributo.equals("endereco")){
+			retorno = this.usuarioSistema.get(login).getEndereco();
+		}
+		else if(atributo.equals("email")){
+			retorno = this.usuarioSistema.get(login).getEmail();
+		}
+		else if(atributo.equals("caronas seguras e tranquilas")){
+			retorno = Integer.toString(this.usuarioSistema.get(login).getCaronaSeguras());
+		}
+		else if(atributo.equals("caronas que não funcionaram")){
+			retorno = Integer.toString(this.usuarioSistema.get(login).getCaronasNaoFuncionou());
+		}
+		else if(atributo.equals("faltas em vagas de caronas")){
+			retorno = Integer.toString(this.usuarioSistema.get(login).getFaltasEmCaronas());
+		}
+		
+		else if(atributo.equals("presenças em vagas de caronas")){
+			retorno = Integer.toString(this.usuarioSistema.get(login).getPresencaEmCarona());
+		}
+		if(atributo.equals("historico de caronas")){
+			retorno = this.usuarioSistema.get(login).getCarona().toString();
+		}
+		else if(atributo.equals("historico de vagas em caronas")){
+			retorno = this.usuarioSistema.get(login).getSolicitacoesAceitas().toString();
+		}
+		return retorno;
+		
+	}
+
+
+	
 }

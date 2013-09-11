@@ -14,7 +14,49 @@ public class Usuario {
 	private List<String> carona;
 	private List<String> solicitacoesFeitas;
 	private List<String> solicitacoesRecebidas;
+	private int caronasNaoFuncionou=0;
+	private int caronaSeguras=0;
+	private int faltasEmCaronas=0;
+	private int presencaEmCarona=0;
+	private List<String> solicitacoesAceitas;
+	private List<String> amigos;
 	
+	public int getCaronasNaoFuncionou() {
+		return caronasNaoFuncionou;
+	}
+
+	public void setCaronasNaoFuncionou(int caronasNaoFuncionou) {
+		this.caronasNaoFuncionou = caronasNaoFuncionou;
+	}
+
+	public int getCaronaSeguras() {
+		return caronaSeguras;
+	}
+
+	public void setCaronaSeguras(int caronaSeguras) {
+		this.caronaSeguras = caronaSeguras;
+	}
+
+	public int getFaltasEmCaronas() {
+		return faltasEmCaronas;
+	}
+
+	public void setFaltasEmCaronas(int faltasEmCaronas) {
+		this.faltasEmCaronas = faltasEmCaronas;
+	}
+
+	public int getPresencaEmCarona() {
+		return presencaEmCarona;
+	}
+
+	public void setPresencaEmCarona(int presencaEmCarona) {
+		this.presencaEmCarona = presencaEmCarona;
+	}
+
+	public List<String> getSolicitacoesAceitas() {
+		return solicitacoesAceitas;
+	}
+
 	public Usuario(String login, String senha, String nome, String endereco, String email){
 		setLogin(login);
 		setSenha(senha);
@@ -25,7 +67,13 @@ public class Usuario {
 		carona= new ArrayList<String>();
 		solicitacoesRecebidas= new ArrayList<String>();
 		solicitacoesFeitas= new ArrayList<String>();
+		amigos= new ArrayList<String>();
+		solicitacoesAceitas= new ArrayList<String>();
 		
+		
+	}
+	public void addAmigo(String idAmigo){
+		this.amigos.add(idAmigo);
 	}
 	
 	public void addSolocitacoesFeita(String idSolicitacao){
@@ -118,4 +166,45 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	public void reviewVagaEmCarona (String idCarona, String review, Usuario caroneiro ){
+		if(!(caroneiro.getSolicitacoesAceitas().contains(idCarona))){
+			throw new IllegalArgumentException("Usuário não possui vaga na carona.");
+		}
+		
+		else if(review.equals("faltou")){
+			caroneiro.setFaltasEmCaronas(caroneiro.getFaltasEmCaronas()+1);
+		}
+		
+		else if(review.equals("não faltou")){
+			caroneiro.setPresencaEmCarona(caroneiro.getPresencaEmCarona()+1);
+		}
+		else{
+			throw new IllegalArgumentException("Opção inválida.");
+		}
+	}
+	
+	public void reviewCarona(String idCarona, String review, Usuario donoCarona ){
+		if(!(this.solicitacoesAceitas.contains(idCarona))){
+			throw new IllegalArgumentException("Usuário não possui vaga na carona.");
+		}
+		else if(review.equals("segura e tranquila")){
+			donoCarona.setCaronaSeguras(donoCarona.getCaronaSeguras()+1);
+		}
+		else if(review.equals("não funcionou")){
+			donoCarona.setCaronasNaoFuncionou(donoCarona.getCaronasNaoFuncionou()+1);
+			
+		}
+		else{
+			throw new IllegalArgumentException("Opção inválida.");
+		}
+		
+	}
+	
+	public String visualizarPerfil(String login){
+		if(login==null|| login.isEmpty() || !(this.login.equals(login))){
+			throw new IllegalAccessError("Login inválido");
+		}
+		return login;
+	}
+
 }

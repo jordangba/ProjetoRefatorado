@@ -116,14 +116,28 @@ public class ControllerGeral {
 	
 	private void verificaSessao(String idUsuario){
 		if(idUsuario== null || idUsuario.isEmpty()){
-			throw new IllegalAccessError( "Sessï¿½o invï¿½lida");
+			throw new IllegalAccessError("Sessão inválida");
 		}
 		else if(!(this.usuarios.getUsuarioSistema().containsKey(idUsuario))){
-			throw new IllegalAccessError("Sessï¿½o inexistente");
+			throw new IllegalAccessError("Sessão inexistente");
 		}
 	}
 	
 	public Usuario buscaUsuarioPorId(String id){
 		return usuarios.usuarioBuscaPeloID(id);
+	}
+	
+	public void reviewCarona(String idSessao, String idCarona, String review){
+		this.usuarios.reviewCarona(idSessao, idCarona, review, this.caronas.getCaronaDoSistema().get(idCarona).getUser().getLogin());
+	}
+	public void reviewVagaEmCarona(String idSessao, String idCarona, String login,String review ){
+		this.usuarios.reviewVagaEmCarona(idSessao, idCarona, review, login);
+	}
+	
+	public String visualizarPerfil(String idSessao, String login){
+		return this.usuarios.visualizarPerfil(idSessao, login);
+	}
+	public String getAtributoPerfil(String login, String atributo){
+		return this.usuarios.getAtributoPerfil(login, atributo);
 	}
 }
