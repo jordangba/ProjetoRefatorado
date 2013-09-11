@@ -1,128 +1,135 @@
 package Bean;
 
-import java.util.Collection;
-import java.util.List;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import Controller.ControllerGeral;
-import Model.Solicitacao;
-import Model.Usuario;
-import Model.Carona;
 
 @ManagedBean(name = "cadastroCaronaBean", eager = true)
 @SessionScoped
 public class cadastroCaronaBean {
 
-	private Usuario user;
-	private String nome;
-	private String endereco;
-	private String login;
-	private String email;
-	private int quantCaronas;
-	private List<Carona> caronas;
+	private String origem;
+	private String destino;
+	private String data;
+	private String hora;
+	private String minutos;
+	private String vagas;
+	private String idUser;
 	private ControllerGeral controller;
-	private List<Solicitacao> solicitacoes;
 
 	public cadastroCaronaBean() {
-		this.user = (Usuario) FacesContext.getCurrentInstance()
+		this.origem = "";
+		this.destino = "";
+		this.hora = "";
+		this.minutos = "";
+		this.vagas = "";
+
+		this.idUser = (String) FacesContext.getCurrentInstance()
 				.getExternalContext().getRequestMap().get("usuarioLogado");
-		this.nome = user.getNome();
-		this.endereco = user.getEndereco();
-		this.login = user.getLogin();
-		this.email = user.getEmail();
-		this.quantCaronas = user.getCarona().size();
+
 		this.controller = (ControllerGeral) FacesContext.getCurrentInstance()
 				.getExternalContext().getRequestMap().get("controller");
-		this.caronas = controller.montaListaDeCarona(user.getIdUser());
-		this.solicitacoes = controller.montaListaDeSolicitacaoRecebidas(user
-				.getIdUser());
 	}
 
-	public Usuario getUser() {
-		return user;
+	public String getOrigem() {
+		return origem;
 	}
 
-	public void setUser(Usuario user) {
-		this.user = user;
+	public void setOrigem(String origem) {
+		this.origem = origem;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getDestino() {
+		return destino;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDestino(String destino) {
+		this.destino = destino;
 	}
 
-	public String getEndereco() {
-		return endereco;
+	public String getData() {
+		return data;
 	}
 
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public void setData(String data) {
+		this.data = data;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getHora() {
+		return hora;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setHora(String hora) {
+		this.hora = hora;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getMinutos() {
+		return minutos;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setMinutos(String minutos) {
+		this.minutos = minutos;
 	}
 
-	public int getQuantCaronas() {
-		return quantCaronas;
+	public String getVagas() {
+		return vagas;
 	}
 
-	public void setQuantCaronas(int quantCaronas) {
-		this.quantCaronas = quantCaronas;
+	public void setVagas(String vagas) {
+		this.vagas = vagas;
 	}
 
-	public List<Carona> getCaronas() {
-		return caronas;
+	public String getIdUser() {
+		return idUser;
 	}
 
-	public void setCaronas(List<Carona> caronas) {
-		this.caronas = caronas;
+	public String cancela() {
+		return "telainicial.xhtml";
 	}
 
-	public List<Solicitacao> getSolicitacoes() {
-		return solicitacoes;
+	public String cadastra() {
+		try {
+			controller.cadastrarCarona(idUser, origem, destino, data, hora,
+					vagas);
+			compartilhaInfo();
+			msgUsuario("Carona Cadastrada", "");
+			return "telaInicial.xhtml";
+		} catch (IllegalArgumentException e) {
+			msgUsuario("Carona nï¿œo cadastrada", e.getMessage());
+		}
+		return "";
 	}
 
-	public void setSolicitacoes(List<Solicitacao> solicitacoes) {
-		this.solicitacoes = solicitacoes;
+	private void msgUsuario(String string1, String string2) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage(string1, string2));
 	}
 
-	public String logout() {
+	public void limpa() {
+		this.origem = "";
+		this.destino = "";
+		this.hora = "";
+		this.minutos = "";
+		this.vagas = "";
+	}
+
+	private void compartilhaInfo() {
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
-				.put("usuarioLogado", null);
+				.put("usuarioLogado", idUser);
 
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
 				.put("controller", controller);
 
-		return "Login.xhtml";
+		if (FacesContext.getCurrentInstance().getExternalContext()
+				.getSessionMap().get("usuarioBean") != null) {
+			usuarioBean bean = (usuarioBean) FacesContext.getCurrentInstance()
+					.getExternalContext().getSessionMap().get("usuarioBean");
+			bean.iniciaBean();
+		}
+
 	}
 
-	public String buscasCarona() {
-		FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
-				.put("usuarioLogado", user);
-
-		FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
-				.put("controller", controller);
-
-		return "buscaCarona.xhtml";
-	}
 }

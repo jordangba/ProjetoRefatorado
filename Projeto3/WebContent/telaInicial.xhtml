@@ -48,7 +48,7 @@
 			<p:commandButton id="searchButton" value="Buscas" update="@all" />
 		</p:panel>
 		<p:commandButton id="editaButton" value="Editar perfil" />
-		<p:commandButton id="logoutButton" value="Logout" action ="#{usuarioBean.logout}" />
+		<p:commandButton id="logoutButton" value="Logout" action ="#{usuarioBean.logout}" update = "@all" />
 
 
 		<div>
@@ -88,7 +88,7 @@
 
 
 		</div>
-		<p:commandButton value="Nova Carona" />
+		<p:commandButton value="Nova Carona" action = "#{usuarioBean.novaCarona}" update ="@all" />
 
 		<p:dataTable var="solicitacao" scrollRows="20" scrollable="true"
 			liveScroll="true" scrollHeight="150" id="SolicitadasTable"

@@ -19,35 +19,35 @@
 			<h:panelGrid columns="2">
 				<h:panelGrid columns="2" cellpadding="5">
 					<h:outputLabel for="Origem" value="Origem:" />
-					<h:inputText value="#{loginBean.origem}" />
+					<h:inputText value="#{cadastroCaronaBean.origem}" />
 				</h:panelGrid>
 
 				<h:panelGrid columns="2" cellpadding="5">
 					<h:outputLabel for="Destino" value="Destino:" />
-					<h:inputText value="#{loginBean.destino}" />
+					<h:inputText value="#{cadastroCaronaBean.destino}" />
 				</h:panelGrid>
 
 				<h:panelGrid columns="2" cellpadding="5">
 					<h:outputLabel for="Data" value="Data:" />
-					<p:inputMask mask="99/99/9999" value="#{loginBean.data}" />
+					<p:inputMask mask="99/99/9999" value="#{cadastroCaronaBean.data}" />
 				</h:panelGrid>
 
 				<h:panelGrid columns="2" cellpadding="5">
 					<h:outputLabel for="Horário" value="Horário:" />
-					<p:inputMask mask="99:99" value="#{loginBean.hora}" />
+					<p:inputMask mask="99:99" value="#{cadastroCaronaBean.hora}" />
 				</h:panelGrid>
 
 				<h:panelGrid columns="2" cellpadding="5">
 					<h:outputLabel for="Vagas" value="Vagas:" />
-					<p:inputMask mask="99" value="#{loginBean.vagas}" />
+					<p:inputMask mask="99" value="#{cadastroCaronaBean.vagas}" />
 				</h:panelGrid>
 
 			</h:panelGrid>
 		</p:panel>
 		<p:commandButton id="salvarButton" value="Salvar" ajax="false"
-			action="#{loginBean.cadastraCarona}" />
+			action="#{cadastroCaronaBean.cadastra}" />
 		<p:commandButton id="cancelarButton" value="Cancelar"
-			action="#{loginBean.cancela}" />
+			action="#{cadastroCaronaBean.cancela}" />
 	</h:form>
 </body>
 </html>

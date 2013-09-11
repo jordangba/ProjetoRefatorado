@@ -1,14 +1,13 @@
 package Bean;
 
-import java.util.Collection;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.naming.directory.InvalidAttributeIdentifierException;
 
 import Controller.ControllerGeral;
-import Model.Usuario;
 
 @ManagedBean(name = "loginBean", eager = true)
 @SessionScoped
@@ -42,35 +41,37 @@ public class LoginBean {
 
 	public String logar() {
 		try {
-			usuarioLogar(login, password);
+			compartilhaInfo(login, password);
 			limpa();
 			return "telaInicial.xhtml";
 		} catch (Exception e) {
 			msgUsuario("Login N�o realizado", e.getMessage());
 			return "";
 		}
-
 	}
 
-	private void usuarioLogar(String login, String password) {
-		FacesContext
-				.getCurrentInstance()
-				.getExternalContext()
-				.getRequestMap()
-				.put("usuarioLogado",
-						controller.buscaUsuarioPorId(this.controller
-								.abrirSessao(login, password)));
+	private void compartilhaInfo(String login, String password) {
+		FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
+				.put("usuarioLogado", controller.abrirSessao(login, password));
 
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
 				.put("controller", controller);
 
+		if (FacesContext.getCurrentInstance().getExternalContext()
+				.getSessionMap().get("usuarioBean") != null) {
+			usuarioBean bean = (usuarioBean) FacesContext.getCurrentInstance()
+					.getExternalContext().getSessionMap().get("usuarioBean");
+			bean.iniciaBean();
+		}
+
 	}
 
-	public String cadastra() {
+	public String cadastra() throws InvalidAttributeIdentifierException {
 		try {
 			controller.criarUsuario(this.loginCadastro, this.senhaCadastro,
 					this.nome, this.endereco, this.email);
-			usuarioLogar(loginCadastro, senhaCadastro);
+
+			compartilhaInfo(loginCadastro, senhaCadastro);
 			limpa();
 			return "telaInicial.xhtml";
 		} catch (IllegalArgumentException e) {

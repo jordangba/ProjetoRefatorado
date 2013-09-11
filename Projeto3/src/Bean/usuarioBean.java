@@ -1,9 +1,6 @@
 package Bean;
 
-import java.util.Collection;
 import java.util.List;
-
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -13,11 +10,11 @@ import Model.Solicitacao;
 import Model.Usuario;
 import Model.Carona;
 
-@ManagedBean(name = "usuarioBean", eager = true)
+@ManagedBean(name = "usuarioBean")
 @SessionScoped
 public class usuarioBean {
 
-	private Usuario user;
+	private String idUser;
 	private String nome;
 	private String endereco;
 	private String login;
@@ -28,27 +25,31 @@ public class usuarioBean {
 	private List<Solicitacao> solicitacoes;
 
 	public usuarioBean() {
-		this.user = (Usuario) FacesContext.getCurrentInstance()
-				.getExternalContext().getRequestMap().get("usuarioLogado");
-		this.nome = user.getNome();
-		this.endereco = user.getEndereco();
-		this.login = user.getLogin();
-		this.email = user.getEmail();
-		this.quantCaronas = user.getCarona().size();
-		this.controller = (ControllerGeral) FacesContext.getCurrentInstance()
-				.getExternalContext().getRequestMap().get("controller");
-		this.caronas = controller.montaListaDeCarona(user.getIdUser());
-		this.solicitacoes = controller.montaListaDeSolicitacaoRecebidas(user
-				.getIdUser());
+		iniciaBean();
+	}
+	
+	
+	public String getIdUser() {
+		return idUser;
 	}
 
-	public Usuario getUser() {
-		return user;
+	public void setIdUser(String idUser) {
+		this.idUser = idUser;
 	}
 
-	public void setUser(Usuario user) {
-		this.user = user;
+
+
+	public ControllerGeral getController() {
+		return controller;
 	}
+
+
+
+	public void setController(ControllerGeral controller) {
+		this.controller = controller;
+	}
+
+
 
 	public String getNome() {
 		return nome;
@@ -112,17 +113,44 @@ public class usuarioBean {
 
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
 				.put("controller", controller);
-
 		return "Login.xhtml";
 	}
 
 	public String buscasCarona() {
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
-				.put("usuarioLogado", user);
+				.put("usuarioLogado", idUser);
 
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
 				.put("controller", controller);
 
 		return "buscaCarona.xhtml";
+	}
+
+	public String novaCarona() {
+		FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
+				.put("usuarioLogado", idUser);
+
+		FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
+				.put("controller", controller);
+
+		return "cadastroCarona.xhtml";
+	}
+	
+	public void iniciaBean(){
+		this.idUser = (String) FacesContext.getCurrentInstance()
+				.getExternalContext().getRequestMap().get("usuarioLogado");
+
+		this.controller = (ControllerGeral) FacesContext.getCurrentInstance()
+				.getExternalContext().getRequestMap().get("controller");
+		
+		Usuario user = controller.buscaUsuarioPorId(idUser);
+		this.nome = user.getNome();
+		this.endereco = user.getEndereco();
+		this.login = user.getLogin();
+		this.email = user.getEmail();
+		this.quantCaronas = user.getCarona().size();
+		this.caronas = controller.montaListaDeCarona(user.getIdUser());
+		this.solicitacoes = controller.montaListaDeSolicitacaoRecebidas(user
+				.getIdUser());
 	}
 }
