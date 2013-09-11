@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title><ui:insert name="title">Carona</ui:insert></title>
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+</h:head>
+
+<body bgcolor="#F8F8FF">
+	<h:form id="form1">
+		<p:growl id="growl" showDetail="true" sticky="true" life="5" />
+		<p:panel header="Nova carona">
+			<h:panelGrid columns="2">
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="Origem" value="Origem:" />
+					<h:inputText value="#{loginBean.origem}" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="Destino" value="Destino:" />
+					<h:inputText value="#{loginBean.destino}" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="Data" value="Data:" />
+					<p:inputMask mask="99/99/9999" value="#{loginBean.data}" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="Horário" value="Horário:" />
+					<p:inputMask mask="99:99" value="#{loginBean.hora}" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="Vagas" value="Vagas:" />
+					<p:inputMask mask="99" value="#{loginBean.vagas}" />
+				</h:panelGrid>
+
+			</h:panelGrid>
+		</p:panel>
+		<p:commandButton id="salvarButton" value="Salvar" ajax="false"
+			action="#{loginBean.cadastraCarona}" />
+		<p:commandButton id="cancelarButton" value="Cancelar"
+			action="#{loginBean.cancela}" />
+	</h:form>
+</body>
+</html>

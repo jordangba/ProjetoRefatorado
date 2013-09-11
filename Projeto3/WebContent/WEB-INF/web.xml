@@ -8,6 +8,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*seam</url-pattern>
+    <url-pattern>*.seam</url-pattern>
   </servlet-mapping>
 </web-app>

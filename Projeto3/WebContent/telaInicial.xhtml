@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Carona</title>
+</h:head>
+
+<body bgcolor="#F8F8FF">
+	<h:form id="form">
+		<p:panel header="Perfil">
+			<h:panelGrid columns="2">
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="Nome" value="Nome:" />
+					<h:outputLabel for="NomeUser" value="#{usuarioBean.nome}" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="login" value="Login:" />
+					<h:outputLabel for="LoginUser" value="#{usuarioBean.login}" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="Email" value="Email:" />
+					<h:outputLabel for="EmailUser" value="#{usuarioBean.email}" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="Endereço" value="Endereço:" />
+					<h:outputLabel for="EndereçoUser" value="#{usuarioBean.endereco}" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="CaronasOfertadas" value="Caronas ofertadas:" />
+					<h:outputLabel for="QuantCaronas"
+						value="#{usuarioBean.quantCaronas}" />
+				</h:panelGrid>
+			</h:panelGrid>
+			<p:commandButton id="searchButton" value="Buscas" update="@all" />
+		</p:panel>
+		<p:commandButton id="editaButton" value="Editar perfil" />
+		<p:commandButton id="logoutButton" value="Logout" action ="#{usuarioBean.logout}" />
+
+
+		<div>
+			<ui:define name="Alguma coisa"></ui:define>
+
+			<p:panel header="Caronas Ofertadas">
+				<h:panelGrid columns="1">
+
+					<p:dataTable var="carona" value="#{usuarioBean.caronas}"
+						rowKey="#{carona.origem}">
+						<p:column headerText="Origem">
+							<h:outputText value="#{carona.origem}" />
+						</p:column>
+
+						<p:column headerText="Destino">
+							<h:outputText value="#{carona.destino}" />
+						</p:column>
+
+						<p:column headerText="Data">
+							<h:outputText value="#{carona.data}" />
+						</p:column>
+
+						<p:column headerText="Hora">
+							<h:outputText value="#{carona.hora}" />
+						</p:column>
+
+						<p:column headerText="Vagas">
+							<h:outputText value="#{carona.vagas}" />
+						</p:column>
+
+					</p:dataTable>
+				</h:panelGrid>
+			</p:panel>
+
+			<br /> <br />
+			<p:growl id="growl" showDetail="true" sticky="true" life="5" />
+
+
+		</div>
+		<p:commandButton value="Nova Carona" />
+
+		<p:dataTable var="solicitacao" scrollRows="20" scrollable="true"
+			liveScroll="true" scrollHeight="150" id="SolicitadasTable"
+			value="#{usuarioBean.solicitacoes}" rowKey="#{solicitacao.pontos}">
+			<f:facet name="header">  
+           	Solicitações de Carona  
+        </f:facet>
+
+			<p:column headerText="Origem">
+				#{solicitacao.getCarona().getOrigem()}
+			</p:column>
+
+			<p:column headerText="Destino">
+				#{solicitacao.carona.destino}
+			</p:column>
+
+			<p:column headerText="Data">
+				#{solicitacao.carona.data}
+			</p:column>
+
+			<p:column headerText="Hora">
+				#{solicitacao.carona.hora}
+			</p:column>
+
+			<p:column headerText="Solicitador">
+				#{solicitacao.donoDaSolicitacao.nome}
+			</p:column>
+
+			<p:column headerText="Ponto de Encontro sugerido">
+				#{solicitacao.pontos}
+			</p:column>
+		</p:dataTable>
+		<p:commandButton value="Recusar" update="@all" />
+		<p:commandButton value="Aceitar" update="@all" />
+	</h:form>
+</body>
+</html>

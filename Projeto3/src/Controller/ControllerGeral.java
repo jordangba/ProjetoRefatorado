@@ -7,6 +7,7 @@ import javax.naming.directory.InvalidAttributeIdentifierException;
 
 import Model.Carona;
 import Model.Solicitacao;
+import Model.Usuario;
 
 public class ControllerGeral {
 
@@ -115,15 +116,14 @@ public class ControllerGeral {
 	
 	private void verificaSessao(String idUsuario){
 		if(idUsuario== null || idUsuario.isEmpty()){
-			throw new IllegalAccessError( "Sessão inválida");
+			throw new IllegalAccessError( "Sessï¿½o invï¿½lida");
 		}
 		else if(!(this.usuarios.getUsuarioSistema().containsKey(idUsuario))){
-			throw new IllegalAccessError("Sessão inexistente");
+			throw new IllegalAccessError("Sessï¿½o inexistente");
 		}
 	}
 	
-
-
-
-	
+	public Usuario buscaUsuarioPorId(String id){
+		return usuarios.usuarioBuscaPeloID(id);
+	}
 }

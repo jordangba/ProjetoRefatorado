@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title><ui:insert name="title">Gerenciador de Tarefas</ui:insert></title>
+</h:head>
+
+<body bgcolor="#F8F8FF">
+	<h:form id="form">
+
+		<h1>Buscas</h1>
+
+		<p:panel header="Busca">
+			<p:outputLabel for="origem" value="Origem: " />
+			<p:inputText id="origem" value="#{loginBean.buscaOrigem}"
+				label="origem" />
+			<br />
+			<p:outputLabel for="destino" value="Destino: " />
+			<p:inputText id="destino" value="#{loginBean.buscaDestino}"
+				label="destino" />
+			<br />
+			<p:commandButton id="buscarButton" value="Buscar"
+				action="#{loginBean.buscarButton}" update="@all" />
+			<h:message for="buscarButton" />
+		</p:panel>
+
+		<p:dataTable id="caronas" var="carona"
+			value="#{loginBean.buscaDeCaronas}" rowKey="#{carona.origem}"
+			selection="#{loginBean.carona}" selectionMode="single">
+
+			<p:column headerText="Origem">  
+            #{carona.origem}  
+        </p:column>
+
+			<p:column headerText="Destino">  
+            #{carona.destino}  
+        </p:column>
+
+			<p:column headerText="Data">  
+            #{carona.data}  
+        </p:column>
+
+			<p:column headerText="Hora">  
+            #{carona.hora}  
+        </p:column>
+
+			<p:column headerText="Vagas">  
+            #{carona.vagas}  
+        </p:column>
+		</p:dataTable>
+		<p:outputLabel value="Ponto sugerido:"/>
+		<p:inputText value="#{loginBean.sugestaoLocal}"  />	
+		<p:commandButton value="Solicitar" action="#{loginBean.addSolicitacao}" updade ="@all"/>
+		<p:commandButton value="Voltar" action="#{loginBean.backButton}" />
+
+	</h:form>
+
+</body>
+</html>
