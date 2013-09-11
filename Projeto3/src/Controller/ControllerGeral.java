@@ -38,9 +38,7 @@ public class ControllerGeral {
 	
 	public String cadastrarCarona (String idUsuario, String origem, String destino, String data, String hora, String vagas){
 		verificaSessao(idUsuario);
-		String id =this.caronas.addCaronaAoSistema(this.usuarios.getUsuarioSistema().get(idUsuario), origem, destino, data, hora, vagas);
-		this.usuarios.getUsuarioSistema().get(idUsuario).addCarona(id);
-		return id;
+		return this.caronas.addCaronaAoSistema(this.usuarios.getUsuarioSistema().get(idUsuario), origem, destino, data, hora, vagas);
 		
 	}
 	

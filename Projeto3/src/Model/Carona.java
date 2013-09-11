@@ -27,9 +27,10 @@ public class Carona{
 	 setVagas(vagas);
 	 this.idUser= idUser;
 	 criaDataEHoraAtual();
-	 setIdCarona(Integer.toString(hashCode()));
+	 setIdCarona(this.idUser + Integer.toString(this.idUser.getCarona().size()));
 	 checaHoraEData(data, hora);
 	 pontos= new ArrayList<PontoEncontro>();
+	 this.idUser.addCarona(this.idCarona);
  }
 @Override
 public int hashCode() {

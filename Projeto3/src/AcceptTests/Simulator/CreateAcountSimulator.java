@@ -40,7 +40,7 @@ public class CreateAcountSimulator {
 		return this.control.getTrajeto(idCarona);
 	}
 	public String localizarCarona(String idsessao,String origem, String destino){
-		return this.control.buscaCarona(origem, destino).toString();
+		return Adapter.ColecaoParaString(this.control.buscaCarona(origem, destino));
 	}
 	
 	public String getAtributoCarona(String idCarona, String atributo){
@@ -93,7 +93,7 @@ public class CreateAcountSimulator {
 	}
 	
 	public String getAtributoPerfil(String login, String atributo){
-		return this.control.getAtributoPerfil(login, atributo);
+		return Adapter.adaptadorParaGetAtributoPerfil(atributo, this.control.getAtributoPerfil(login, atributo));
 	}
 	public void  encerrarSessao(String login) {
 		control.encerrarSessao();
