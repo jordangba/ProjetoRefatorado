@@ -45,10 +45,10 @@
 						value="#{usuarioBean.quantCaronas}" />
 				</h:panelGrid>
 			</h:panelGrid>
-			<p:commandButton id="searchButton" value="Buscas" update="@all" />
+			<p:commandButton id="editarButton" value="Editar" update="@all" action = "#{usuarioBean.editaPerfil}" />
 		</p:panel>
-		<p:commandButton id="editaButton" value="Editar perfil" />
-		<p:commandButton id="logoutButton" value="Logout" action ="#{usuarioBean.logout}" update = "@all" />
+		<p:commandButton id="buscasButton" value="Buscas" />
+		<p:commandButton id="logoutButton" value="Logout" action ="#{usuarioBean.logout}" update="@all" />
 
 
 		<div>

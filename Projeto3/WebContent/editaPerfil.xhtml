@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Editar Perfil</title>
+</h:head>
+
+<h:body>
+
+	<style>
+#form2 {
+	position: absolute;
+	left: 50%;
+	margin-left: -300px;
+}
+
+.ui-growl {
+	left: 20px;
+}
+</style>
+
+	<h:form id="form2">
+		<p:growl id="novoUsuario" showDetail="true" sticky="true" life="5" />
+		<p:panel header="Novo Usuário">
+
+			<h:panelGrid columns="2" id="matchGrid">
+
+				<h:outputLabel for="newName" value="Nome: " />
+				<p:inputText id="newName" value="#{editarPerfilBean.nome}"
+					label="Nome" required="true" />
+
+				<h:outputLabel for="newEmail" value="Email: " />
+				<p:inputMask id="newEmail" value="#{editarPerfilBean.email}"
+					label="Email" required="true"
+					validatorMessage="Informe um email válido">
+					<f:validateRegex
+						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</p:inputMask>
+
+				<h:outputLabel for="newEndereco" value="Endereço: " />
+				<p:inputText id="newEndereco" value="#{editarPerfilBean.endereco}"
+					label="Edereco" required="false" />
+
+				<h:outputLabel for="pwd1" value="Senha: " />
+				<p:password id="pwd1" value="#{editarPerfilBean.senha}"
+					match="pwd2" label="Password 1" required="true">
+					<f:validateLength maximum="20" minimum="6" />
+				</p:password>
+
+				<h:outputLabel for="pwd2" value="Confirme Senha: " />
+				<p:password id="pwd2" value="#{editarPerfilBean.confirmacaoSenha}"
+					label="Password 2" required="true" />
+			</h:panelGrid>
+
+			<p:commandButton id="saveButton" update="novoUsuario" value="Save"
+				action="#{editarPerfilBean.salvar}" />
+			<!-- 			lembrar de colocar a acao do botao	 -->
+			<p:commandButton id="cancelaButton" update="novoUsuario"
+				value="Cancela" />
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
+

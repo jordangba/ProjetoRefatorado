@@ -117,24 +117,20 @@ public class usuarioBean {
 	}
 
 	public String buscasCarona() {
-		FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
-				.put("usuarioLogado", idUser);
-
-		FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
-				.put("controller", controller);
-
+		mandaInfo();
 		return "buscaCarona.xhtml";
 	}
 
 	public String novaCarona() {
-		FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
-				.put("usuarioLogado", idUser);
-
-		FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
-				.put("controller", controller);
-
+		mandaInfo();
 		return "cadastroCarona.xhtml";
 	}
+	
+	public String editaPerfil() {
+		mandaInfo();
+		return "editaPerfil.xhtml";
+
+	}	
 	
 	public void iniciaBean(){
 		this.idUser = (String) FacesContext.getCurrentInstance()
@@ -152,5 +148,13 @@ public class usuarioBean {
 		this.caronas = controller.montaListaDeCarona(user.getIdUser());
 		this.solicitacoes = controller.montaListaDeSolicitacaoRecebidas(user
 				.getIdUser());
+	}
+	
+	private void mandaInfo() {
+		FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
+				.put("usuarioLogado", idUser);
+
+		FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
+				.put("controller", controller);
 	}
 }

@@ -114,10 +114,10 @@ public class ControllerGeral {
 	
 	private void verificaSessao(String idUsuario){
 		if(idUsuario== null || idUsuario.isEmpty()){
-			throw new IllegalAccessError("Sessão inválida");
+			throw new IllegalAccessError("Sessï¿½o invï¿½lida");
 		}
 		else if(!(this.usuarios.getUsuarioSistema().containsKey(idUsuario))){
-			throw new IllegalAccessError("Sessão inexistente");
+			throw new IllegalAccessError("Sessï¿½o inexistente");
 		}
 	}
 	
@@ -137,5 +137,11 @@ public class ControllerGeral {
 	}
 	public String getAtributoPerfil(String login, String atributo){
 		return this.usuarios.getAtributoPerfil(login, atributo);
+	}
+	
+	public void editaPerfil(String idUser, String nome, String endereco,
+			String senha, String email)
+			throws InvalidAttributeIdentifierException {
+		this.usuarios.editaPerfil(idUser, nome, endereco, senha, email);
 	}
 }
