@@ -5,20 +5,22 @@ import java.util.List;
 
 import javax.naming.directory.InvalidAttributeIdentifierException;
 
+import Criador.FazUserECaronas;
 import Model.Carona;
 import Model.Solicitacao;
 import Model.Usuario;
 
 public class ControllerGeral {
 
-	ControllerUser usuarios;
-	ControllerCaronas caronas;
-	ControllerSolicitacao solicitacaoes;
+	private ControllerUser usuarios;
+	private ControllerCaronas caronas;
+	private ControllerSolicitacao solicitacaoes;
 	
-	public ControllerGeral(){
+	public ControllerGeral() {
 		this.usuarios= new ControllerUser();
 		this.caronas= new ControllerCaronas();
 		this.solicitacaoes= new ControllerSolicitacao();
+
 	}
 	
 	
@@ -32,7 +34,6 @@ public class ControllerGeral {
 	}
 	
 	public String abrirSessao(String login, String senha){
-		
 		return usuarios.LogarUser(senha, login);
 	}
 	
@@ -121,13 +122,28 @@ public class ControllerGeral {
 	
 	private void verificaSessao(String idUsuario){
 		if(idUsuario== null || idUsuario.isEmpty()){
-			throw new IllegalAccessError("Sessï¿½o invï¿½lida");
+			throw new IllegalAccessError("Sessão inválida");
 		}
 		else if(!(this.usuarios.getUsuarioSistema().containsKey(idUsuario))){
-			throw new IllegalAccessError("Sessï¿½o inexistente");
+			throw new IllegalAccessError("Sessão inexistente");
 		}
 	}
 	
+	public ControllerUser getUsuarios() {
+		return usuarios;
+	}
+
+
+	public ControllerCaronas getCaronas() {
+		return caronas;
+	}
+
+
+	public ControllerSolicitacao getSolicitacaoes() {
+		return solicitacaoes;
+	}
+
+
 	public Usuario buscaUsuarioPorId(String id){
 		return usuarios.usuarioBuscaPeloID(id);
 	}
@@ -150,5 +166,9 @@ public class ControllerGeral {
 			String senha, String email)
 			throws InvalidAttributeIdentifierException {
 		this.usuarios.editaPerfil(idUser, nome, endereco, senha, email);
+	}
+	
+	public void addUserECaronas(){
+		FazUserECaronas.gerarUserECaronas();
 	}
 }

@@ -35,16 +35,16 @@ public class ControllerUser {
 	private void verificaLoginESenha(String login, String senha) {
 		verificaLogin(login);
 		if (usuarioSistema.get(login).getSenha().equals(senha) == false) {
-			throw new IllegalAccessError("Login invï¿½lido");
+			throw new IllegalAccessError("Login inválido");
 		}
 	}
 
 	private void verificaLogin(String login) throws IllegalAccessError {
 		if (login == null || login.isEmpty()) {
-			throw new IllegalAccessError("Login invï¿½lido");
+			throw new IllegalAccessError("Login inválido");
 		}
 		if (!(usuarioSistema.containsKey(login))) {
-			throw new IllegalAccessError("Usuï¿½rio inexistente");
+			throw new IllegalAccessError("Usuário inexistente");
 		}
 	}
 
@@ -52,7 +52,7 @@ public class ControllerUser {
 			throws InvalidAttributeIdentifierException {
 		if (usuarioSistema.containsKey(login)) {
 			throw new InvalidAttributeIdentifierException(
-					"Jï¿½ existe um usuï¿½rio com este login");
+					"Já existe um usuário com este login");
 		}
 	}
 
@@ -70,7 +70,7 @@ public class ControllerUser {
 		for (Usuario user : usuarioSistema.values()) {
 			if (user.getEmail().equals(email)) {
 				throw new InvalidAttributeIdentifierException(
-						"Jï¿½ existe um usuï¿½rio com este email");
+						"Já existe um usuário com este email");
 			}
 
 		}
@@ -92,7 +92,7 @@ public class ControllerUser {
 		String retorno = "";
 		verificaLogin(login);
 		if (atributo == null || atributo.isEmpty()) {
-			throw new IllegalArgumentException("Atributo invï¿½lido");
+			throw new IllegalArgumentException("Atributo inválido");
 		} else if (atributo.equals("nome")) {
 			retorno = this.logado.getNome();
 		} else if (atributo.equals("endereco")) {
@@ -137,15 +137,16 @@ public class ControllerUser {
 		} else if (atributo.equals("caronas seguras e tranquilas")) {
 			retorno = Integer.toString(this.usuarioSistema.get(login)
 					.getCaronaSeguras());
-		} else if (atributo.equals("caronas que nï¿½o funcionaram")) {
+		} else if (atributo.equals("caronas que não funcionaram")) {
 			retorno = Integer.toString(this.usuarioSistema.get(login)
 					.getCaronasNaoFuncionou());
 		} else if (atributo.equals("faltas em vagas de caronas")) {
+
 			retorno = Integer.toString(this.usuarioSistema.get(login)
 					.getFaltasEmCaronas());
 		}
 
-		else if (atributo.equals("presenï¿½as em vagas de caronas")) {
+		else if (atributo.equals("presenças em vagas de caronas")) {
 			retorno = Integer.toString(this.usuarioSistema.get(login)
 					.getPresencaEmCarona());
 		}

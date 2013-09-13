@@ -27,11 +27,11 @@ public class ControllerCaronas {
 
 	private void verificaVagas(String vagas) {
 		if (vagas == null) {
-			throw new IllegalArgumentException("Vaga invï¿½lida");
+			throw new IllegalArgumentException("Vaga inválida");
 		}
 		if (vagas.isEmpty() || vagas.matches("[a-zA-Z]*")
 				|| Integer.parseInt(vagas) <= 0) {
-			throw new IllegalArgumentException("Vaga invï¿½lida");
+			throw new IllegalArgumentException("Vaga inválida");
 		}
 
 	}
@@ -72,7 +72,7 @@ public class ControllerCaronas {
 
 	private void verificaCarona(String idCarona) {
 		if (idCarona == null) {
-			throw new IllegalAccessError("Carona Invï¿½lida");
+			throw new IllegalAccessError("Carona Inválida");
 		} else if (idCarona.isEmpty()) {
 			throw new IllegalAccessError("Carona Inexistente");
 		} else if (!(this.caronaDoSistema.containsKey(idCarona))) {
@@ -82,7 +82,7 @@ public class ControllerCaronas {
 
 	private void verificaIdCarona(String idCarona) {
 		if (idCarona == null || idCarona.isEmpty()) {
-			throw new IllegalAccessError("Identificador do carona ï¿½ invï¿½lido");
+			throw new IllegalAccessError("Identificador do carona é inválido");
 		} else if (!(this.caronaDoSistema.containsKey(idCarona))) {
 			throw new IllegalAccessError("Item inexistente");
 		}
@@ -90,7 +90,7 @@ public class ControllerCaronas {
 
 	private void verificAtributo(String atributo) {
 		if (atributo == null || atributo.isEmpty()) {
-			throw new IllegalAccessError("Atributo invï¿½lido");
+			throw new IllegalAccessError("Atributo inválido");
 		}
 	}
 
@@ -109,7 +109,7 @@ public class ControllerCaronas {
 
 	private void verificaTrajeto(String idCarona) {
 		if (idCarona == null) {
-			throw new IllegalAccessError("Trajeto Invï¿½lida");
+			throw new IllegalAccessError("Trajeto Inválida");
 		} else if (idCarona.isEmpty()
 				|| !(this.caronaDoSistema.containsKey(idCarona))) {
 			throw new IllegalAccessError("Trajeto Inexistente");
@@ -119,7 +119,7 @@ public class ControllerCaronas {
 	private void verificaOrigem(String origem) {
 		if (origem == null
 				|| origem.matches("[\\-/.\\[_\\]()!\"+,:;<=>{|}#@$%ï¿½&*0-9].*")) {
-			throw new IllegalArgumentException("Origem invï¿½lida");
+			throw new IllegalArgumentException("Origem inválida");
 		}
 
 	}
@@ -127,7 +127,7 @@ public class ControllerCaronas {
 	private void verificaDestino(String destino) {
 		if (destino == null
 				|| destino.matches("[\\-/.\\[_\\]()!\"+,:;<=>{|}#@$%ï¿½&*0-9].*")) {
-			throw new IllegalArgumentException("Destino invï¿½lido");
+			throw new IllegalArgumentException("Destino inválido");
 		}
 
 	}
