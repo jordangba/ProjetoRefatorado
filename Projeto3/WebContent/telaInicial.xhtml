@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns:="http://www.w3.org/1999/xhtml"
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-
+	xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 </h:head>
 
@@ -46,10 +44,9 @@
 				</h:panelGrid>
 			</h:panelGrid>
 			<p:commandButton id="editarButton" value="Editar" update="@all" action = "#{usuarioBean.editaPerfil}" />
+			<p:commandButton id="logoutButton" value="Logout" action ="#{usuarioBean.logout}" update="@all" />
 		</p:panel>
-		<p:commandButton id="buscasButton" value="Buscas" />
-		<p:commandButton id="logoutButton" value="Logout" action ="#{usuarioBean.logout}" update="@all" />
-
+		<p:commandButton id="buscasButton" value="Buscar carona" action = "#{usuarioBean.buscasCarona}"/>
 
 		<div>
 			<ui:define name="Alguma coisa"></ui:define>
@@ -85,13 +82,11 @@
 
 			<br /> <br />
 			<p:growl id="growl" showDetail="true" sticky="true" life="5" />
-
-
 		</div>
 		<p:commandButton value="Nova Carona" action = "#{usuarioBean.novaCarona}" update ="@all" />
 
 		<p:dataTable var="solicitacao" scrollRows="20" scrollable="true"
-			liveScroll="true" scrollHeight="150" id="SolicitadasTable"
+			liveScroll="true" scrollHeight="150" id="SolicitacoesTable"
 			value="#{usuarioBean.solicitacoes}" rowKey="#{solicitacao.pontos}">
 			<f:facet name="header">  
            	Solicitações de Carona  
@@ -118,11 +113,107 @@
 			</p:column>
 
 			<p:column headerText="Ponto de Encontro sugerido">
-				#{solicitacao.pontos}
+				
 			</p:column>
 		</p:dataTable>
-		<p:commandButton value="Recusar" update="@all" />
-		<p:commandButton value="Aceitar" update="@all" />
+		
+		
+		<p:dataTable var="solicitacao" scrollRows="20" scrollable="true"
+			liveScroll="true" scrollHeight="150" id="aceitasTable"
+			value="#{usuarioBean.solicitacoes}" rowKey="#{solicitacao.pontos}">
+			<f:facet name="header">  
+           	Solicitações de aceitas 
+        </f:facet>
+
+			<p:column headerText="Origem">
+				#{solicitacao.getCarona().getOrigem()}
+			</p:column>
+
+			<p:column headerText="Destino">
+				#{solicitacao.carona.destino}
+			</p:column>
+
+			<p:column headerText="Data">
+				#{solicitacao.carona.data}
+			</p:column>
+
+			<p:column headerText="Hora">
+				#{solicitacao.carona.hora}
+			</p:column>
+
+			<p:column headerText="Solicitador">
+				#{solicitacao.donoDaSolicitacao.nome}
+			</p:column>
+
+			<p:column headerText="Ponto de Encontro sugerido">
+				<p:commandButton value="Ver pontos sugeridos" update="@all" />
+			</p:column>
+		</p:dataTable>
+		
+		
+		<p:dataTable var="solicitacao" scrollRows="20" scrollable="true"
+			liveScroll="true" scrollHeight="150" id="SolicitadasTable"
+			value="#{usuarioBean.solicitadas}" rowKey="#{solicitacao.pontos}">
+			<f:facet name="header">  
+           	Minhas caroanas solicitadas
+        </f:facet>
+
+			<p:column headerText="Origem">
+				#{solicitacao.getCarona().getOrigem()}
+			</p:column>
+
+			<p:column headerText="Destino">
+				#{solicitacao.carona.destino}
+			</p:column>
+
+			<p:column headerText="Data">
+				#{solicitacao.carona.data}
+			</p:column>
+
+			<p:column headerText="Hora">
+				#{solicitacao.carona.hora}
+			</p:column>
+
+			<p:column headerText="Solicitador">
+				#{solicitacao.donoDaSolicitacao.nome}
+			</p:column>
+				<p:commandButton value="Ver pontos sugeridos" update="@all" />	
+			<p:column headerText="Ponto de Encontro sugerido">
+				<p:commandButton value="Ver pontos sugeridos" update="@all" />
+			</p:column>
+		</p:dataTable>
+				
+		<p:dataTable var="solicitacao" scrollRows="20" scrollable="true"
+			liveScroll="true" scrollHeight="150" id="amigosTable"
+			value="#{usuarioBean.solicitacoes}" rowKey="#{solicitacao.pontos}">
+			<f:facet name="header">  
+           	Amigos 
+        </f:facet>
+
+			<p:column headerText="Origem">
+				#{solicitacao.getCarona().getOrigem()}
+			</p:column>
+
+			<p:column headerText="Destino">
+				#{solicitacao.carona.destino}
+			</p:column>
+
+			<p:column headerText="Data">
+				#{solicitacao.carona.data}
+			</p:column>
+
+			<p:column headerText="Hora">
+				#{solicitacao.carona.hora}
+			</p:column>
+
+			<p:column headerText="Solicitador">
+				#{solicitacao.donoDaSolicitacao.nome}
+			</p:column>
+
+			<p:column headerText="Pontos de Encontro sugerido">
+				<p:commandButton value="Ver pontos sugeridos" update="@all" />
+			</p:column>
+		</p:dataTable>
 	</h:form>
 </body>
 </html>

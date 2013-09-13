@@ -18,21 +18,21 @@
 
 		<p:panel header="Busca">
 			<p:outputLabel for="origem" value="Origem: " />
-			<p:inputText id="origem" value="#{loginBean.buscaOrigem}"
+			<p:inputText id="origem" value="#{buscasBean.origem}"
 				label="origem" />
 			<br />
 			<p:outputLabel for="destino" value="Destino: " />
-			<p:inputText id="destino" value="#{loginBean.buscaDestino}"
+			<p:inputText id="destino" value="#{buscasBean.destino}"
 				label="destino" />
 			<br />
 			<p:commandButton id="buscarButton" value="Buscar"
-				action="#{loginBean.buscarButton}" update="@all" />
+				action="#{buscasBean.buscar}" update="@all" />
 			<h:message for="buscarButton" />
 		</p:panel>
 
 		<p:dataTable id="caronas" var="carona"
-			value="#{loginBean.buscaDeCaronas}" rowKey="#{carona.origem}"
-			selection="#{loginBean.carona}" selectionMode="single">
+			value="#{buscasBean.caronas}" rowKey="#{carona.origem}"
+			selection="#{buscasBean.caronaSelecionada}" selectionMode="single">
 
 			<p:column headerText="Origem">  
             #{carona.origem}  
@@ -55,9 +55,9 @@
         </p:column>
 		</p:dataTable>
 		<p:outputLabel value="Ponto sugerido:"/>
-		<p:inputText value="#{loginBean.sugestaoLocal}"  />	
-		<p:commandButton value="Solicitar" action="#{loginBean.addSolicitacao}" updade ="@all"/>
-		<p:commandButton value="Voltar" action="#{loginBean.backButton}" />
+		<p:inputText value="#{buscasBean.sugestaoLocal}"  />	
+		<p:commandButton value="Solicitar" action="#{buscasBean.addSolicitacao}" updade ="@all"/>
+		<p:commandButton value="Voltar" action="#{buscasBean.voltar}" />
 
 	</h:form>
 

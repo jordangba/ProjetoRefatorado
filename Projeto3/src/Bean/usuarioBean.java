@@ -23,33 +23,28 @@ public class usuarioBean {
 	private List<Carona> caronas;
 	private ControllerGeral controller;
 	private List<Solicitacao> solicitacoes;
+	private List<Solicitacao> solicitadas;
+	private List<Solicitacao> aceitas;
 
 	public usuarioBean() {
 		iniciaBean();
 	}
-	
-	
-	public String getIdUser() {
-		return idUser;
+		
+	public List<Solicitacao> getSolicitadas() {
+		return solicitadas;
 	}
 
-	public void setIdUser(String idUser) {
-		this.idUser = idUser;
+	public void setSolicitadas(List<Solicitacao> solicitadas) {
+		this.solicitadas = solicitadas;
 	}
 
-
-
-	public ControllerGeral getController() {
-		return controller;
+	public List<Solicitacao> getAceitas() {
+		return aceitas;
 	}
 
-
-
-	public void setController(ControllerGeral controller) {
-		this.controller = controller;
+	public void setAceitas(List<Solicitacao> aceitas) {
+		this.aceitas = aceitas;
 	}
-
-
 
 	public String getNome() {
 		return nome;
@@ -146,8 +141,8 @@ public class usuarioBean {
 		this.email = user.getEmail();
 		this.quantCaronas = user.getCarona().size();
 		this.caronas = controller.montaListaDeCarona(user.getIdUser());
-		this.solicitacoes = controller.montaListaDeSolicitacaoRecebidas(user
-				.getIdUser());
+		this.solicitacoes = controller.montaListaDeSolicitacaoRecebidas(idUser);
+		this.solicitadas = controller.montaListaDeSolicitacaoFeitas(idUser);
 	}
 	
 	private void mandaInfo() {
@@ -156,5 +151,13 @@ public class usuarioBean {
 
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
 				.put("controller", controller);
+		
+		if (FacesContext.getCurrentInstance().getExternalContext()
+				.getSessionMap().get("buscasBean") != null) {
+			buscasBean bean = (buscasBean) FacesContext.getCurrentInstance()
+					.getExternalContext().getSessionMap().get("buscasBean");
+			bean.iniciaBean();
+		}
+
 	}
 }

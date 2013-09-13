@@ -46,6 +46,10 @@ public class ControllerGeral {
 		return this.caronas.getCarona(idCarona);
 	}
 	
+	public Carona pegaCarona(String idCarona){
+		return this.caronas.pegaCarona(idCarona);
+	}
+	
 	public String getTrajeto(String idCarona){
 		return this.caronas.getTrageto(idCarona);
 	}
