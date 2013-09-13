@@ -25,6 +25,7 @@ public class usuarioBean {
 	private List<Solicitacao> solicitacoes;
 	private List<Solicitacao> solicitadas;
 	private List<Solicitacao> aceitas;
+	private Solicitacao solicitacaoSelecionada;
 
 	public usuarioBean() {
 		iniciaBean();
@@ -101,6 +102,14 @@ public class usuarioBean {
 	public void setSolicitacoes(List<Solicitacao> solicitacoes) {
 		this.solicitacoes = solicitacoes;
 	}
+	
+	public Solicitacao getSolicitacaoSelecionada() {
+		return solicitacaoSelecionada;
+	}
+
+	public void setSolicitacaoSelecionada(Solicitacao solicitacaoSelecionada) {
+		this.solicitacaoSelecionada = solicitacaoSelecionada;
+	}
 
 	public String logout() {
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
@@ -143,6 +152,7 @@ public class usuarioBean {
 		this.caronas = controller.montaListaDeCarona(user.getIdUser());
 		this.solicitacoes = controller.montaListaDeSolicitacaoRecebidas(idUser);
 		this.solicitadas = controller.montaListaDeSolicitacaoFeitas(idUser);
+		this.aceitas = controller.montaListaDeSolicitacaoAceitas(idUser);
 	}
 	
 	private void mandaInfo() {
@@ -158,6 +168,18 @@ public class usuarioBean {
 					.getExternalContext().getSessionMap().get("buscasBean");
 			bean.iniciaBean();
 		}
-
+	}
+	
+	public void aceitar(){
+		controller.aceitarSolicitacao(this.idUser, this.solicitacaoSelecionada.getIdSolicitacao());
+		this.aceitas = controller.montaListaDeSolicitacaoAceitas(idUser);
+		System.out.println(aceitas.size());
+		
+		//iniciaBean();
+	}
+	
+	public void recusar(){
+		controller.rejeitarSolicitacao(this.idUser, this.solicitacaoSelecionada.getIdSolicitacao());
+		//iniciaBean();
 	}
 }
