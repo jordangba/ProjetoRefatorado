@@ -111,6 +111,9 @@ public class ControllerGeral {
 	public List<Solicitacao> montaListaDeSolicitacaoRecebidas(String idUser){
 		return this.solicitacaoes.fazerListaSolicitacoesRecebidas(this.usuarios.getUsuarioSistema().get(idUser));
 	}
+	public List<Solicitacao> montaListaDeSolicitacaoAceitas(String iduser){
+		return this.solicitacaoes.fazerListaSolicitacoesAceitas(this.usuarios.getUsuarioSistema().get(iduser));
+	}
 	
 	public List<Carona> transformaListaDeIdCaronaEmListaDeCarona(List<String> idCaronas){
 		return this.caronas.transformaListaDeIdCaronaEmListaDeCarona(idCaronas);

@@ -87,6 +87,14 @@ public class ControllerSolicitacao {
 		return resultado;
 	}
 	
+	public List<Solicitacao> fazerListaSolicitacoesAceitas(Usuario user){
+		List<Solicitacao> resultado = new ArrayList<Solicitacao>();
+		for (String solicitacao : user.getSolicitacoesAceitas()) {
+			resultado.add(this.solicitacoesSistema.get(solicitacao));
+		}
+		return resultado;
+	}
+	
 
 	
 }
