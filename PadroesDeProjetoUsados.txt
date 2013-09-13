@@ -1,0 +1,21 @@
+
+Grasp.
+
+Controller - Usamos para separar as diferentes manipulações no sistema, tendo 3 controllers diferentes, para deixar mais fácil o entendimento e manuséio das funções, visto que cada um só manipula eventos especificos à eles.
+
+Creator - Usamos nas classes beans visto que são elas que fazem a criação do objeto ContollerGeral, onde está as funções gerais do programa.
+
+Baixo acoplamento e Alta Coesão - A classe Usuario so armazena os id’s de outras classes, sendo assim, não conhecendo-as diretamente, tornando o codigo mais “enxuto”. 
+
+Information Expert - Delegamos a armazenação de pontos de encontro nas caronas, pois elas têm informação necessária para guardar, criar e manipular os pontos de encontro.
+
+
+Padrões  GOF.
+
+Padrão States - Usamos para simular as ações que uma solicitação pode fazer, de acordo com o estado que ela se encontre no decorrer do processo.
+
+Adapter - Usamos para adaptar a saida do programas com as saidas solicitadas nos testes do Easy Accept, em alguns casos.
+
+Fachada - Utilizamos na executação dos testes do easy accept, para que não fique acoplado com o codigo do programa, ocultando assim a complexidade.
+
+Singleton - Utilizamos para criar objetos únicos (Ex: ControllerGeral), já que necessitamos só de um único objeto para todas as Beans criadas.
