@@ -15,7 +15,7 @@
 	<property name="classTeste" value="easyaccept" />
 	<property name="webContent" value="WebContent" />
 	<property name="CATALINA_HOME" value="C:\tomcat" /> <!-- Defina o local da pasta do Tomcat. -->
-	<path id="libs">
+	<path id="lib">
 		<fileset dir="lib">
 			<include name="*.jar" />
 		</fileset>
@@ -90,7 +90,7 @@
 	</target>
 
 	<!-- ================================= target: start ================================= -->
-	<target name="start" depends="startWindows, startLinux, stop,limpa,deploy">
+	<target name="start" depends="stop,limpa,deploy,startLinux,startWindows">
 		<echo message="START" />
 	</target>
 
