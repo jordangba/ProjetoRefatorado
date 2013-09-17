@@ -1,8 +1,15 @@
 package Model;
 
-public class Aceito implements Estado {
+import java.io.Serializable;
+
+public class Aceito implements Estado, Serializable {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public String toString(){
 		return "Aceito";
 	}

@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -8,8 +9,12 @@ import Model.Carona;
 import Model.PontoEncontro;
 import Model.Usuario;
 
-public class ControllerCaronas {
+public class ControllerCaronas implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Map<String, Carona> caronaDoSistema;
 
 	public ControllerCaronas() {

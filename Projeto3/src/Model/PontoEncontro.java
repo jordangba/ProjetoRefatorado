@@ -1,16 +1,22 @@
 package Model;
 
-public class PontoEncontro {
+import java.io.Serializable;
 
+public class PontoEncontro implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String ponto;
 	private String idponto;
 	private String idUser;
 	private String idCarona;
-	
-	public PontoEncontro(String pontos, String idUser, String idCarona){
+
+	public PontoEncontro(String pontos, String idUser, String idCarona) {
 		setPonto(pontos);
-		this.idCarona= idCarona;
-		this.idUser= idUser;
+		this.idCarona = idCarona;
+		this.idUser = idUser;
 		setIdponto(Integer.toString(hashCode()));
 	}
 
@@ -22,17 +28,16 @@ public class PontoEncontro {
 		return result;
 	}
 
-	
-
 	public void setIdponto(String idponto) {
 		this.idponto = idponto;
 	}
 
-	private void verificaPonto(String ponto){
-		if(ponto.isEmpty()){
-		throw new IllegalArgumentException("Ponto Inválido");
+	private void verificaPonto(String ponto) {
+		if (ponto.isEmpty()) {
+			throw new IllegalArgumentException("Ponto Inválido");
 		}
 	}
+
 	public String getPonto() {
 		return ponto;
 	}
@@ -53,7 +58,8 @@ public class PontoEncontro {
 	public String getIdCarona() {
 		return idCarona;
 	}
-	public String toString(){
+
+	public String toString() {
 		return this.ponto;
 	}
 }

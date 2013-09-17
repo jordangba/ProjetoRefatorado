@@ -1,43 +1,45 @@
 package Model;
 
 import java.awt.IllegalComponentStateException;
+import java.io.Serializable;
 
-public class Solicitacao {
-	
-	
+public class Solicitacao implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Usuario donoDaSolicitacao;
 	private Carona carona;
 	private String idSolicitacao;
 	private Usuario donoCarona;
 	private PontoEncontro ponto;
 	private Estado estado;
-	
-	
-	public Solicitacao(Usuario donaDaSolicitacao, Carona carona, PontoEncontro ponto){
+
+	public Solicitacao(Usuario donaDaSolicitacao, Carona carona,
+			PontoEncontro ponto) {
 		setDonoDaSolicitacao(donaDaSolicitacao);
 		setCarona(carona);
 		setDonoCarona(carona.getUser());
 		setPonto(ponto);
-		estado= new EmEspera();
-		setIdSolicitacao(Integer.toString(hashCode()));
-		this.donoDaSolicitacao.addSolocitacoesFeita(idSolicitacao);
-		this.donoCarona.addSolicitacoesRecebidas(idSolicitacao);
-	
-	}
-	
-	public Solicitacao(Usuario donaDaSolicitacao, Carona carona){
-		setDonoDaSolicitacao(donaDaSolicitacao);
-		setCarona(carona);
-		setDonoCarona(carona.getUser());
-		estado= new EmEspera();
+		estado = new EmEspera();
 		setIdSolicitacao(Integer.toString(hashCode()));
 		this.donoDaSolicitacao.addSolocitacoesFeita(idSolicitacao);
 		this.donoCarona.addSolicitacoesRecebidas(idSolicitacao);
 
-	
 	}
-	
-	
+
+	public Solicitacao(Usuario donaDaSolicitacao, Carona carona) {
+		setDonoDaSolicitacao(donaDaSolicitacao);
+		setCarona(carona);
+		setDonoCarona(carona.getUser());
+		estado = new EmEspera();
+		setIdSolicitacao(Integer.toString(hashCode()));
+		this.donoDaSolicitacao.addSolocitacoesFeita(idSolicitacao);
+		this.donoCarona.addSolicitacoesRecebidas(idSolicitacao);
+
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -51,25 +53,23 @@ public class Solicitacao {
 		return result;
 	}
 
-
-
-	public void aceitaSolicitacao(){
-		if((carona.getVagas()>1 &&(estado instanceof EmEspera))){
-			int vagas= carona.getVagas()-1;
+	public void aceitaSolicitacao() {
+		if ((carona.getVagas() > 1 && (estado instanceof EmEspera))) {
+			int vagas = carona.getVagas() - 1;
 			carona.setVagas(vagas);
-			this.estado=estado.mudaEstadoAceitacao(this.estado);
-			donoDaSolicitacao.getSolicitacoesAceitas().add(carona.getIdCarona());
+			this.estado = estado.mudaEstadoAceitacao(this.estado);
+			donoDaSolicitacao.getSolicitacoesAceitas()
+					.add(carona.getIdCarona());
 			donoDaSolicitacao.getSolicitacoesFeitas().remove(idSolicitacao);
-		}
-		else{
+		} else {
 			throw new IllegalComponentStateException("Solicitação inexistente");
 		}
 	}
-	public void recusarSolicitacao(){
-		if(estado instanceof EmEspera){
-			this.estado=estado.mudaEstadoRejeicao(this.estado);
-		}
-		else{
+
+	public void recusarSolicitacao() {
+		if (estado instanceof EmEspera) {
+			this.estado = estado.mudaEstadoRejeicao(this.estado);
+		} else {
 			throw new IllegalComponentStateException("Solicitação inexistente");
 		}
 	}
@@ -77,6 +77,7 @@ public class Solicitacao {
 	public Usuario getDonoDaSolicitacao() {
 		return donoDaSolicitacao;
 	}
+
 	public void setDonoDaSolicitacao(Usuario donoDaSolicitacao) {
 		this.donoDaSolicitacao = donoDaSolicitacao;
 	}
@@ -84,42 +85,47 @@ public class Solicitacao {
 	public Carona getCarona() {
 		return carona;
 	}
+
 	public void setCarona(Carona carona) {
 		this.carona = carona;
 	}
+
 	public String getIdSolicitacao() {
 		return idSolicitacao;
 	}
+
 	public void setIdSolicitacao(String idSolicitacao) {
 		this.idSolicitacao = idSolicitacao;
 	}
+
 	public PontoEncontro getPonto() {
 		return ponto;
 	}
+
 	public void setPonto(PontoEncontro ponto) {
 		this.ponto = ponto;
 	}
-	
-	public void desistirSolicitacao(Usuario user, Carona carona){
-		if( estado instanceof Aceito){
-			int vagas= carona.getVagas() +1;
+
+	public void desistirSolicitacao(Usuario user, Carona carona) {
+		if (estado instanceof Aceito) {
+			int vagas = carona.getVagas() + 1;
 			carona.setVagas(vagas);
-			this.estado= estado.mudaEstadoDesistir(estado);
-		}
-		else if(estado instanceof EmEspera){
-			this.estado= estado.mudaEstadoDesistir(estado);
+			this.estado = estado.mudaEstadoDesistir(estado);
+		} else if (estado instanceof EmEspera) {
+			this.estado = estado.mudaEstadoDesistir(estado);
 		}
 	}
 
 	public void setDonoCarona(Usuario donoCarona) {
 		this.donoCarona = donoCarona;
 	}
-	
-	
+
 	public Usuario getDonoCarona() {
 		return donoCarona;
 	}
-	
 
-	
+	public Estado getEstado() {
+		return this.estado;
+	}
+
 }

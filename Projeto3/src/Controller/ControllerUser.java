@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,8 +8,12 @@ import javax.naming.directory.InvalidAttributeIdentifierException;
 
 import Model.Usuario;
 
-public class ControllerUser {
+public class ControllerUser implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Map<String, Usuario> usuarioSistema;
 	private Usuario logado;
 
@@ -94,9 +99,9 @@ public class ControllerUser {
 		if (atributo == null || atributo.isEmpty()) {
 			throw new IllegalArgumentException("Atributo inválido");
 		} else if (atributo.equals("nome")) {
-			retorno = this.logado.getNome();
+			retorno = this.usuarioSistema.get(login).getNome();
 		} else if (atributo.equals("endereco")) {
-			retorno = this.logado.getEndereco();
+			retorno = this.usuarioSistema.get(login).getEndereco();
 		} else {
 			throw new IllegalArgumentException("Atributo inexistente");
 		}
