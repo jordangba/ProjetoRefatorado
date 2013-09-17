@@ -29,8 +29,8 @@ public class LoginBean {
 					.getExternalContext().getRequestMap().get("controller");
 		} else {
 			this.controller = new ControllerGeral();
-			//controller.addUserECaronas();
-			//System.out.println(controller.getUsuarios().getUsuarioSistema().size());
+			controller.addUserECaronas();
+			System.out.println(controller.getUsuarios().getUsuarioSistema().size());
 		}
 		this.login = "";
 		this.password = "";

@@ -168,9 +168,9 @@ public class ControllerGeral implements Serializable {
 
 	private void verificaSessao(String idUsuario) {
 		if (idUsuario == null || idUsuario.isEmpty()) {
-			throw new IllegalAccessError("Sessão inválida");
+			throw new IllegalAccessError("Sessï¿½o invï¿½lida");
 		} else if (!(this.usuarios.getUsuarioSistema().containsKey(idUsuario))) {
-			throw new IllegalAccessError("Sessão inexistente");
+			throw new IllegalAccessError("Sessï¿½o inexistente");
 		}
 	}
 
@@ -215,7 +215,7 @@ public class ControllerGeral implements Serializable {
 	}
 
 	public void addUserECaronas() {
-		FazUserECaronas.gerarUserECaronas();
+		FazUserECaronas.gerarUserECaronas(this);
 	}
 
 	// public static void main(String[] args) {

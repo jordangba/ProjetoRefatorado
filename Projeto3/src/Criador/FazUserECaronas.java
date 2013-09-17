@@ -14,30 +14,30 @@ public class FazUserECaronas implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static Random gerador = new Random();
-	private static String[] origem = { "Travessa Antônio Bernadino de Sena",
-			"Travessa do Juá", "Travessa Cantor Evaldo Braga",
-			"Travessa Estácio de Sá", " Travessa Gonçalves Dias",
+	private static String[] origem = { "Travessa Antï¿½nio Bernadino de Sena",
+			"Travessa do Juï¿½", "Travessa Cantor Evaldo Braga",
+			"Travessa Estï¿½cio de Sï¿½", " Travessa Gonï¿½alves Dias",
 			"Travessa Joaquim Azevedo", "Travessa Maria Lucena Barbosa",
 			" Travessa Professora Djanira Tavares",
-			" Travessa Severino Pimentel", "Travessa São Francisco",
+			" Travessa Severino Pimentel", "Travessa Sï¿½o Francisco",
 			"Avenida Aeroclube", "Avenida Amazonas", "Avenida Brasil",
-			"Avenida Bélgica", "Avenida Cajazeiras", "Avenida Canal",
-			"Avenida Confederação Suíça", "Avenida Deputado Raimundo Asfora",
-			"Avenida Elpídio de Almeida",
-			"Avenida Engenheiro José Celino Filho" };
+			"Avenida Bï¿½lgica", "Avenida Cajazeiras", "Avenida Canal",
+			"Avenida Confederaï¿½ï¿½o Suï¿½ï¿½a", "Avenida Deputado Raimundo Asfora",
+			"Avenida Elpï¿½dio de Almeida",
+			"Avenida Engenheiro Josï¿½ Celino Filho" };
 
 	private static String[] destino = { "Avenida Estados Unidos",
-			"Avenida Flórida", "Avenida Francisco Amaro de Lima",
+			"Avenida Flï¿½rida", "Avenida Francisco Amaro de Lima",
 			"Avenida Francisco Lopes de Almeida",
-			"Avenida Grão-Ducado de Luxemburgo",
+			"Avenida Grï¿½o-Ducado de Luxemburgo",
 			"Avenida Henrique Alexandrino de Melo", "Avenida Holanda",
 			"Avenida Industrial Ademar Veloso da Silveira",
-			"Avenida Internacional", "Avenida Itália", "Avenida Iugoslávia",
-			"Avenida Janúncio Ferreira", "Avenida Joaquim Caroca",
-			"Avenida José Hamilton Alves", "Avenida João Wallig",
-			"Avenida Nicarágua", "Avenida Nova Zelândia",
-			"Avenida Plínio Lemos", "Avenida Prefeito Severino Bezerra Cabral",
-			"Avenida Reino Unido da Grã-Bretanha" };
+			"Avenida Internacional", "Avenida Itï¿½lia", "Avenida Iugoslï¿½via",
+			"Avenida Janï¿½ncio Ferreira", "Avenida Joaquim Caroca",
+			"Avenida Josï¿½ Hamilton Alves", "Avenida Joï¿½o Wallig",
+			"Avenida Nicarï¿½gua", "Avenida Nova Zelï¿½ndia",
+			"Avenida Plï¿½nio Lemos", "Avenida Prefeito Severino Bezerra Cabral",
+			"Avenida Reino Unido da Grï¿½-Bretanha" };
 
 	public static String pegaOrigem() {
 		return origem[gerador.nextInt(20)];
@@ -73,8 +73,8 @@ public class FazUserECaronas implements Serializable {
 		return "Usuario";
 	}
 
-	public static void gerarUserECaronas() {
-		ControllerGeral colocador = new ControllerGeral();
+	public static void gerarUserECaronas(ControllerGeral colocador) {
+		
 		for (int i = 0; i < 500; i++) {
 			try {
 				colocador.criarUsuario(completoLogin() + Integer.toString(i),
