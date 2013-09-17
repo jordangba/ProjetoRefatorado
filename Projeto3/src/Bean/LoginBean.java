@@ -22,13 +22,15 @@ public class LoginBean {
 	private String email;
 	private ControllerGeral controller;
 
-	public LoginBean() {
+	public LoginBean() {		
 		if (FacesContext.getCurrentInstance().getExternalContext()
 				.getRequestMap().get("controller") != null) {
 			controller = (ControllerGeral) FacesContext.getCurrentInstance()
 					.getExternalContext().getRequestMap().get("controller");
 		} else {
 			this.controller = new ControllerGeral();
+			//controller.addUserECaronas();
+			//System.out.println(controller.getUsuarios().getUsuarioSistema().size());
 		}
 		this.login = "";
 		this.password = "";

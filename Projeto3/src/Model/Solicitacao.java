@@ -59,10 +59,11 @@ public class Solicitacao implements Serializable {
 			carona.setVagas(vagas);
 			this.estado = estado.mudaEstadoAceitacao(this.estado);
 			donoDaSolicitacao.getSolicitacoesAceitas()
-					.add(carona.getIdCarona());
+					.add(idSolicitacao);
 			donoDaSolicitacao.getSolicitacoesFeitas().remove(idSolicitacao);
+			donoCarona.getSolicitacoesRecebidas().remove(idSolicitacao);
 		} else {
-			throw new IllegalComponentStateException("Solicitação inexistente");
+			throw new IllegalComponentStateException("Solicitaï¿½ï¿½o inexistente");
 		}
 	}
 
@@ -70,7 +71,7 @@ public class Solicitacao implements Serializable {
 		if (estado instanceof EmEspera) {
 			this.estado = estado.mudaEstadoRejeicao(this.estado);
 		} else {
-			throw new IllegalComponentStateException("Solicitação inexistente");
+			throw new IllegalComponentStateException("Solicitaï¿½ï¿½o inexistente");
 		}
 	}
 

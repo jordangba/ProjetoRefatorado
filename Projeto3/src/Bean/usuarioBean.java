@@ -30,7 +30,7 @@ public class usuarioBean {
 	public usuarioBean() {
 		iniciaBean();
 	}
-		
+
 	public List<Solicitacao> getSolicitadas() {
 		return solicitadas;
 	}
@@ -102,7 +102,7 @@ public class usuarioBean {
 	public void setSolicitacoes(List<Solicitacao> solicitacoes) {
 		this.solicitacoes = solicitacoes;
 	}
-	
+
 	public Solicitacao getSolicitacaoSelecionada() {
 		return solicitacaoSelecionada;
 	}
@@ -129,20 +129,20 @@ public class usuarioBean {
 		mandaInfo();
 		return "cadastroCarona.xhtml";
 	}
-	
+
 	public String editaPerfil() {
 		mandaInfo();
 		return "editaPerfil.xhtml";
 
-	}	
-	
-	public void iniciaBean(){
+	}
+
+	public void iniciaBean() {
 		this.idUser = (String) FacesContext.getCurrentInstance()
 				.getExternalContext().getRequestMap().get("usuarioLogado");
 
 		this.controller = (ControllerGeral) FacesContext.getCurrentInstance()
 				.getExternalContext().getRequestMap().get("controller");
-		
+
 		Usuario user = controller.buscaUsuarioPorId(idUser);
 		this.nome = user.getNome();
 		this.endereco = user.getEndereco();
@@ -154,32 +154,39 @@ public class usuarioBean {
 		this.solicitadas = controller.montaListaDeSolicitacaoFeitas(idUser);
 		this.aceitas = controller.montaListaDeSolicitacaoAceitas(idUser);
 	}
-	
+
 	private void mandaInfo() {
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
 				.put("usuarioLogado", idUser);
 
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
 				.put("controller", controller);
-		
+
 		if (FacesContext.getCurrentInstance().getExternalContext()
 				.getSessionMap().get("buscasBean") != null) {
 			buscasBean bean = (buscasBean) FacesContext.getCurrentInstance()
 					.getExternalContext().getSessionMap().get("buscasBean");
 			bean.iniciaBean();
 		}
-	}
-	
-	public void aceitar(){
-		controller.aceitarSolicitacao(this.idUser, this.solicitacaoSelecionada.getIdSolicitacao());
-		this.aceitas = controller.montaListaDeSolicitacaoAceitas(idUser);
-		System.out.println(aceitas.size());
 		
-		//iniciaBean();
+		if (FacesContext.getCurrentInstance().getExternalContext()
+				.getSessionMap().get("cadastroCaronaBean") != null) {
+			cadastroCaronaBean bean = (cadastroCaronaBean) FacesContext.getCurrentInstance()
+					.getExternalContext().getSessionMap().get("cadastroCaronaBean");
+			bean.iniciaBean();
+		}
 	}
-	
-	public void recusar(){
-		controller.rejeitarSolicitacao(this.idUser, this.solicitacaoSelecionada.getIdSolicitacao());
-		//iniciaBean();
+
+	public void aceitar() {
+		controller.aceitarSolicitacao(this.idUser,
+				this.solicitacaoSelecionada.getIdSolicitacao());
+		this.aceitas = controller.montaListaDeSolicitacaoAceitas(idUser);
+		this.solicitacoes = controller.montaListaDeSolicitacaoRecebidas(idUser);
+	}
+
+	public void recusar() {
+		controller.rejeitarSolicitacao(this.idUser,
+				this.solicitacaoSelecionada.getIdSolicitacao());
+		this.solicitacoes = controller.montaListaDeSolicitacaoRecebidas(idUser);
 	}
 }

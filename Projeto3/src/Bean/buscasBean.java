@@ -2,6 +2,8 @@ package Bean;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -107,10 +109,16 @@ public class buscasBean {
 			controller.solicitarVagaPontoEncontro(idUser,
 					caronaSelecionada.getIdCarona(), this.sugestaoLocal);
 		}
+		msgUsuario("Carona solicitada", "");
 	}
 
 	public String voltar() {
 		mandaInfo();
 		return "telaInicial.xhtml";
+	}
+	
+	private void msgUsuario(String string1, String string2) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage(string1, string2));
 	}
 }

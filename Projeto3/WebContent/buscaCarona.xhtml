@@ -13,13 +13,12 @@
 
 <body bgcolor="#F8F8FF">
 	<h:form id="form">
-
+		<p:growl id="growl" showDetail="true" sticky="true" life="5" />
 		<h1>Buscas</h1>
 
 		<p:panel header="Busca">
 			<p:outputLabel for="origem" value="Origem: " />
-			<p:inputText id="origem" value="#{buscasBean.origem}"
-				label="origem" />
+			<p:inputText id="origem" value="#{buscasBean.origem}" label="origem" />
 			<br />
 			<p:outputLabel for="destino" value="Destino: " />
 			<p:inputText id="destino" value="#{buscasBean.destino}"
@@ -30,9 +29,9 @@
 			<h:message for="buscarButton" />
 		</p:panel>
 
-		<p:dataTable id="caronas" var="carona"
-			value="#{buscasBean.caronas}" rowKey="#{carona.origem}"
-			selection="#{buscasBean.caronaSelecionada}" selectionMode="single">
+		<p:dataTable id="caronas" var="carona" value="#{buscasBean.caronas}"
+			rowKey="#{carona.origem}" selection="#{buscasBean.caronaSelecionada}"
+			selectionMode="single">
 
 			<p:column headerText="Origem">  
             #{carona.origem}  
@@ -54,9 +53,10 @@
             #{carona.vagas}  
         </p:column>
 		</p:dataTable>
-		<p:outputLabel value="Ponto sugerido:"/>
-		<p:inputText value="#{buscasBean.sugestaoLocal}"  />	
-		<p:commandButton value="Solicitar" action="#{buscasBean.addSolicitacao}" updade ="@all"/>
+		<p:outputLabel value="Ponto sugerido:" />
+		<p:inputText value="#{buscasBean.sugestaoLocal}" />
+		<p:commandButton value="Solicitar"
+			action="#{buscasBean.addSolicitacao}" updade="@all" />
 		<p:commandButton value="Voltar" action="#{buscasBean.voltar}" />
 
 	</h:form>

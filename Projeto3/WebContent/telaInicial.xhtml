@@ -91,8 +91,10 @@
 
 		<p:dataTable var="solicitacao" scrollRows="20" scrollable="true"
 			liveScroll="true" scrollHeight="150" id="SolicitacoesTable"
-			value="#{usuarioBean.solicitacoes}" rowKey="#{solicitacao.carona.origem}"
-			selection="#{usuarioBean.solicitacaoSelecionada}" selectionMode="single">
+			value="#{usuarioBean.solicitacoes}"
+			rowKey="#{solicitacao.carona.origem}"
+			selection="#{usuarioBean.solicitacaoSelecionada}"
+			selectionMode="single">
 			<f:facet name="header">  
            	Solicitações de Carona  
         </f:facet>
@@ -118,7 +120,7 @@
 			</p:column>
 
 			<p:column headerText="Ponto de Encontro sugerido">
-				<p:commandButton value="Ver pontos sugeridos" update="@all" />
+				#{solicitacao.ponto.ponto}				
 			</p:column>
 		</p:dataTable>
 		<p:commandButton id="aceitarButton" value="Aceitar" update="@all"
@@ -155,14 +157,15 @@
 			</p:column>
 
 			<p:column headerText="Ponto de Encontro sugerido">
-				<p:commandButton value="Ver pontos sugeridos" update="@all" />
+				#{solicitacao.ponto.ponto}				
 			</p:column>
 		</p:dataTable>
 
 
 		<p:dataTable var="solicitacao" scrollRows="20" scrollable="true"
 			liveScroll="true" scrollHeight="150" id="SolicitadasTable"
-			value="#{usuarioBean.solicitadas}" rowKey="#{solicitacao.carona.origem}">
+			value="#{usuarioBean.solicitadas}"
+			rowKey="#{solicitacao.carona.origem}">
 			<f:facet name="header">  
            	Minhas caroanas solicitadas
         </f:facet>
@@ -188,13 +191,14 @@
 			</p:column>
 			<p:commandButton value="Ver pontos sugeridos" update="@all" />
 			<p:column headerText="Ponto de Encontro sugerido">
-				<p:commandButton value="Ver pontos sugeridos" update="@all" />
+				#{solicitacao.ponto.ponto}				
 			</p:column>
 		</p:dataTable>
 
 		<p:dataTable var="solicitacao" scrollRows="20" scrollable="true"
 			liveScroll="true" scrollHeight="150" id="amigosTable"
-			value="#{usuarioBean.solicitacoes}" rowKey="#{solicitacao.carona.origem}">
+			value="#{usuarioBean.solicitacoes}"
+			rowKey="#{solicitacao.carona.origem}">
 			<f:facet name="header">  
            	Amigos 
         </f:facet>
@@ -219,8 +223,8 @@
 				#{solicitacao.donoDaSolicitacao.nome}
 			</p:column>
 
-			<p:column headerText="Pontos de Encontro sugerido">
-				<p:commandButton value="Ver pontos sugeridos" update="@all" />
+			<p:column headerText="Ponto de Encontro sugerido">
+				#{solicitacao.ponto.ponto}				
 			</p:column>
 		</p:dataTable>
 	</h:form>

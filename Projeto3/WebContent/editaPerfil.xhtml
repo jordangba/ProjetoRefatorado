@@ -60,7 +60,7 @@
 				action="#{editarPerfilBean.salvar}" />
 			<!-- 			lembrar de colocar a acao do botao	 -->
 			<p:commandButton id="cancelaButton" update="novoUsuario"
-				value="Cancela" />
+				value="Cancela" action = "#{editarPerfilBean.cancelar}"/>
 		</p:panel>
 	</h:form>
 </h:body>

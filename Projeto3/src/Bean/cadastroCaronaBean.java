@@ -21,9 +21,14 @@ public class cadastroCaronaBean {
 	private ControllerGeral controller;
 
 	public cadastroCaronaBean() {
+		iniciaBean();
+	}
+
+	public void iniciaBean() {
 		this.origem = "";
 		this.destino = "";
 		this.hora = "";
+		this.data = "";
 		this.minutos = "";
 		this.vagas = "";
 
@@ -87,7 +92,7 @@ public class cadastroCaronaBean {
 	}
 
 	public String cancela() {
-		return "telainicial.xhtml";
+		return "telaInicial.xhtml";
 	}
 
 	public String cadastra() {
@@ -106,14 +111,6 @@ public class cadastroCaronaBean {
 	private void msgUsuario(String string1, String string2) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage(string1, string2));
-	}
-
-	public void limpa() {
-		this.origem = "";
-		this.destino = "";
-		this.hora = "";
-		this.minutos = "";
-		this.vagas = "";
 	}
 
 	private void compartilhaInfo() {
