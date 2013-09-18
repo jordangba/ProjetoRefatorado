@@ -1,5 +1,6 @@
 package Criador;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
@@ -73,7 +74,7 @@ public class FazUserECaronas implements Serializable {
 		return "Usuario";
 	}
 
-	public static void gerarUserECaronas(ControllerGeral colocador) {
+	public static void gerarUserECaronas(ControllerGeral colocador) throws IOException {
 		
 		for (int i = 0; i < 500; i++) {
 			try {

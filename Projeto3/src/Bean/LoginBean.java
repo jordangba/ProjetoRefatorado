@@ -1,6 +1,9 @@
 package Bean;
 
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -8,6 +11,7 @@ import javax.faces.context.FacesContext;
 import javax.naming.directory.InvalidAttributeIdentifierException;
 
 import Controller.ControllerGeral;
+import PersistenciaXML.Persistencia;
 
 @ManagedBean(name = "loginBean", eager = true)
 @SessionScoped
@@ -22,15 +26,21 @@ public class LoginBean {
 	private String email;
 	private ControllerGeral controller;
 
-	public LoginBean() {		
+	public LoginBean() throws IOException {		
 		if (FacesContext.getCurrentInstance().getExternalContext()
 				.getRequestMap().get("controller") != null) {
 			controller = (ControllerGeral) FacesContext.getCurrentInstance()
 					.getExternalContext().getRequestMap().get("controller");
 		} else {
-			this.controller = new ControllerGeral();
-			controller.addUserECaronas();
-			System.out.println(controller.getUsuarios().getUsuarioSistema().size());
+			if (new File("Projeto3.txt").exists()){
+				Persistencia persistencia = new Persistencia("Projeto3.txt");
+				this.controller = persistencia.lerDados(controller);
+			}
+			else{
+				this.controller = new ControllerGeral();
+				controller.addUserECaronas();
+
+			}
 		}
 		this.login = "";
 		this.password = "";
@@ -43,10 +53,11 @@ public class LoginBean {
 
 	public String logar() {
 		try {
+			System.out.println("Estou em logar");
 			compartilhaInfo(login, password);
 			limpa();
 			return "telaInicial.xhtml";
-		} catch (Exception e) {
+	} catch (Exception e) {
 			msgUsuario("Login N�o realizado", e.getMessage());
 			return "";
 		}
@@ -65,6 +76,7 @@ public class LoginBean {
 					.getExternalContext().getSessionMap().get("usuarioBean");
 			bean.iniciaBean();
 		}
+		System.out.println("Compartilhar info ok"); 
 
 	}
 
@@ -155,5 +167,6 @@ public class LoginBean {
 		this.senhaCadastro = "";
 		this.endereco = "";
 		this.email = "";
+		System.out.println("Limpa ok");
 	}
 }

@@ -122,6 +122,10 @@
 			<p:column headerText="Ponto de Encontro sugerido">
 				#{solicitacao.ponto.ponto}				
 			</p:column>
+
+			<p:column headerText="Estado">
+				#{solicitacao.estado}				
+			</p:column>
 		</p:dataTable>
 		<p:commandButton id="aceitarButton" value="Aceitar" update="@all"
 			action="#{usuarioBean.aceitar}" />
@@ -133,7 +137,7 @@
 			liveScroll="true" scrollHeight="150" id="aceitasTable"
 			value="#{usuarioBean.aceitas}" rowKey="#{solicitacao.carona.origem}">
 			<f:facet name="header">  
-           	SolicitaÃ§Ãµes de aceitas 
+           	Solicitações aceitas 
         </f:facet>
 
 			<p:column headerText="Origem">
@@ -159,15 +163,21 @@
 			<p:column headerText="Ponto de Encontro sugerido">
 				#{solicitacao.ponto.ponto}				
 			</p:column>
+
+			<p:column headerText="Estado">
+				#{solicitacao.estado}				
+			</p:column>
 		</p:dataTable>
 
 
 		<p:dataTable var="solicitacao" scrollRows="20" scrollable="true"
 			liveScroll="true" scrollHeight="150" id="SolicitadasTable"
 			value="#{usuarioBean.solicitadas}"
-			rowKey="#{solicitacao.carona.origem}">
+			rowKey="#{solicitacao.carona.origem}"
+			selection="#{usuarioBean.solicitadaSelecionada}"
+			selectionMode="single">
 			<f:facet name="header">  
-           	Minhas caroanas solicitadas
+           	Minhas caronas solicitadas
         </f:facet>
 
 			<p:column headerText="Origem">
@@ -189,44 +199,16 @@
 			<p:column headerText="Solicitador">
 				#{solicitacao.donoDaSolicitacao.nome}
 			</p:column>
-			<p:commandButton value="Ver pontos sugeridos" update="@all" />
 			<p:column headerText="Ponto de Encontro sugerido">
 				#{solicitacao.ponto.ponto}				
 			</p:column>
-		</p:dataTable>
 
-		<p:dataTable var="solicitacao" scrollRows="20" scrollable="true"
-			liveScroll="true" scrollHeight="150" id="amigosTable"
-			value="#{usuarioBean.solicitacoes}"
-			rowKey="#{solicitacao.carona.origem}">
-			<f:facet name="header">  
-           	Amigos 
-        </f:facet>
-
-			<p:column headerText="Origem">
-				#{solicitacao.getCarona().getOrigem()}
-			</p:column>
-
-			<p:column headerText="Destino">
-				#{solicitacao.carona.destino}
-			</p:column>
-
-			<p:column headerText="Data">
-				#{solicitacao.carona.data}
-			</p:column>
-
-			<p:column headerText="Hora">
-				#{solicitacao.carona.hora}
-			</p:column>
-
-			<p:column headerText="Solicitador">
-				#{solicitacao.donoDaSolicitacao.nome}
-			</p:column>
-
-			<p:column headerText="Ponto de Encontro sugerido">
-				#{solicitacao.ponto.ponto}				
+			<p:column headerText="Estado">
+				#{solicitacao.estado}				
 			</p:column>
 		</p:dataTable>
+		<p:commandButton value="Desistir" action="#{usuarioBean.desistir}"
+			update="@all" />
 	</h:form>
 </body>
 </html>

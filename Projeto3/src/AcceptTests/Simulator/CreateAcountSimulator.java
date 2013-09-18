@@ -23,7 +23,7 @@ public class CreateAcountSimulator implements Serializable{
 
 	public void criarUsuario(String login, String senha, String nome,
 			String endereco, String email)
-			throws InvalidAttributeIdentifierException {
+			throws InvalidAttributeIdentifierException, IOException {
 		control.criarUsuario(login, senha, nome, endereco, email);
 	}
 
@@ -37,7 +37,7 @@ public class CreateAcountSimulator implements Serializable{
 	}
 
 	public String cadastrarCarona(String idUsuario, String origem,
-			String destino, String data, String hora, String vagas) {
+			String destino, String data, String hora, String vagas) throws IOException {
 		return this.control.cadastrarCarona(idUsuario, origem, destino, data,
 				hora, vagas);
 	}
@@ -60,21 +60,21 @@ public class CreateAcountSimulator implements Serializable{
 	}
 
 	public String sugerirPontoEncontro(String idUser, String idCarona,
-			String pontos) {
+			String pontos) throws IOException {
 		return control.addPonto(pontos, idUser, idCarona);
 	}
 
 	public void responderSugestaoPontoEncontro(String idUser, String idCarona,
-			String idSugestao, String ponto) {
+			String idSugestao, String ponto) throws IOException {
 		control.repostaPonto(idUser, idCarona, idSugestao, ponto);
 	}
 
-	public String solicitarVaga(String idSessao, String idCarona) {
+	public String solicitarVaga(String idSessao, String idCarona) throws IOException {
 		return this.control.solicitarVaga(idSessao, idCarona);
 	}
 
 	public String solicitarVagaPontoEncontro(String idSessao, String idCarona,
-			String ponto) {
+			String ponto) throws IOException {
 		return this.control.solicitarVagaPontoEncontro(idSessao, idCarona,
 				ponto);
 	}
@@ -84,20 +84,20 @@ public class CreateAcountSimulator implements Serializable{
 	}
 
 	public void aceitarSolicitacaoPontoEncontro(String idSessao,
-			String idSolicitacao) {
+			String idSolicitacao) throws IOException {
 		this.control.aceitarSolicitacao(idSessao, idSolicitacao);
 	}
 
-	public void rejeitarSolicitacao(String idSessao, String idSolicitacao) {
+	public void rejeitarSolicitacao(String idSessao, String idSolicitacao) throws IOException {
 		this.control.rejeitarSolicitacao(idSessao, idSolicitacao);
 	}
 
-	public void aceitarSolicitacao(String idSessao, String idSolicitacao) {
+	public void aceitarSolicitacao(String idSessao, String idSolicitacao) throws IOException {
 		this.control.aceitarSolicitacao(idSessao, idSolicitacao);
 	}
 
 	public void desistirRequisicao(String idSessao, String idCarona,
-			String idSolicitacao) {
+			String idSolicitacao) throws IOException {
 		this.control.desistirRequisicao(idSessao, idCarona, idSolicitacao);
 
 	}

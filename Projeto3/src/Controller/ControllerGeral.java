@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import Model.Carona;
 import Model.Solicitacao;
 import Model.Usuario;
 import PersistenciaXML.ArquivoXML;
+import PersistenciaXML.Persistencia;
 
 public class ControllerGeral implements Serializable {
 
@@ -26,16 +28,19 @@ public class ControllerGeral implements Serializable {
 		this.usuarios = new ControllerUser();
 		this.caronas = new ControllerCaronas();
 		this.solicitacaoes = new ControllerSolicitacao();
-		try{
-		this.arquivo = new ArquivoXML();
-		}catch(Exception e){}
+		try {
+			this.arquivo = new ArquivoXML();
+		} catch (Exception e) {
+		}
 	}
 
 	public void criarUsuario(String login, String senha, String nome,
 			String endereco, String email)
-			throws InvalidAttributeIdentifierException {
+			throws InvalidAttributeIdentifierException, IOException {
 		this.usuarios.addUsuarioAoSistema(login, senha, nome, endereco, email);
-		this.arquivo.cadastraUsuario(this.usuarios.getUsuarioSistema().get(login));
+		this.arquivo.cadastraUsuario(this.usuarios.getUsuarioSistema().get(
+				login));
+		salvar();
 	}
 
 	public String getAtributoUsuario(String login, String atributo) {
@@ -47,15 +52,16 @@ public class ControllerGeral implements Serializable {
 	}
 
 	public String cadastrarCarona(String idUsuario, String origem,
-			String destino, String data, String hora, String vagas) {
+			String destino, String data, String hora, String vagas) throws IOException {
 		verificaSessao(idUsuario);
 		String retorno = this.caronas.addCaronaAoSistema(this.usuarios
 				.getUsuarioSistema().get(idUsuario), origem, destino, data,
 				hora, vagas);
 		this.arquivo.cadastraCarona(this.caronas.getCaronaDoSistema().get(
 				retorno));
-		return retorno;
+		salvar();
 
+		return retorno;
 	}
 
 	public String getCarona(String idCarona) {
@@ -78,35 +84,41 @@ public class ControllerGeral implements Serializable {
 		return this.caronas.buscaCarona(origem, destino);
 	}
 
-	public String addPonto(String pontos, String idUser, String idCarona) {
-		return this.caronas.addPonto(pontos, idUser, idCarona);
+	public String addPonto(String pontos, String idUser, String idCarona) throws IOException {
+		String retorno= this.caronas.addPonto(pontos, idUser, idCarona);
+		salvar();
+		return retorno;
 	}
 
 	public void repostaPonto(String idUser, String idCarona, String idPonto,
-			String ponto) {
+			String ponto) throws IOException {
 		this.caronas.repostaPonto(idUser, idCarona, idPonto, ponto);
+		salvar();
 	}
 
 	public void encerrarSessao() {
 		this.usuarios.encerrarSessao();
 	}
 
-	public String solicitarVaga(String idSessao, String idCarona) {
+	public String solicitarVaga(String idSessao, String idCarona)
+			throws IOException {
 		String retorno = this.solicitacaoes.addSolicitacao(this.usuarios
 				.getUsuarioSistema().get(idSessao), this.caronas
 				.getCaronaDoSistema().get(idCarona));
 		this.arquivo.cadastraSolicitacao(this.solicitacaoes
 				.getSolicitacoesSistema().get(retorno));
+		salvar();
 		return retorno;
 	}
 
 	public String solicitarVagaPontoEncontro(String idSessao, String idCarona,
-			String ponto) {
+			String ponto) throws IOException {
 		String retorno = this.solicitacaoes.addSolicitacaoPonto(this.usuarios
 				.getUsuarioSistema().get(idSessao), this.caronas
 				.getCaronaDoSistema().get(idCarona), ponto);
 		this.arquivo.cadastraSolicitacao(this.solicitacaoes
 				.getSolicitacoesSistema().get(retorno));
+		salvar();
 		return retorno;
 	}
 
@@ -114,30 +126,35 @@ public class ControllerGeral implements Serializable {
 		return this.solicitacaoes.getAtributo(idSolicitacao, atributo);
 	}
 
-	public void rejeitarSolicitacao(String idSessao, String idSolicitacao) {
+	public void rejeitarSolicitacao(String idSessao, String idSolicitacao)
+			throws IOException {
 		this.arquivo.removeSolicitacao(idSolicitacao);
 		this.solicitacaoes.recusarSolicitacao(this.usuarios.getLogado(),
 				idSolicitacao);
 		this.arquivo.cadastraSolicitacao(this.solicitacaoes
 				.getSolicitacoesSistema().get(idSolicitacao));
+		salvar();
 	}
 
-	public void aceitarSolicitacao(String idSessao, String idSolicitacao) {
+	public void aceitarSolicitacao(String idSessao, String idSolicitacao)
+			throws IOException {
 		this.arquivo.removeSolicitacao(idSolicitacao);
 		this.solicitacaoes.aceitaSolicitacao(this.usuarios.getLogado(),
 				idSolicitacao);
 		this.arquivo.cadastraSolicitacao(this.solicitacaoes
 				.getSolicitacoesSistema().get(idSolicitacao));
+		salvar();
 	}
 
 	public void desistirRequisicao(String idSessao, String idCarona,
-			String idSolicitacao) {
+			String idSolicitacao) throws IOException {
 		this.arquivo.removeSolicitacao(idSolicitacao);
 		this.solicitacaoes.desistirRequisicao(this.usuarios.getUsuarioSistema()
 				.get(idSessao),
 				this.caronas.getCaronaDoSistema().get(idCarona), idSolicitacao);
 		this.arquivo.cadastraSolicitacao(this.solicitacaoes
 				.getSolicitacoesSistema().get(idSolicitacao));
+		salvar();
 	}
 
 	public List<Carona> montaListaDeCarona(String idUser) {
@@ -210,12 +227,15 @@ public class ControllerGeral implements Serializable {
 
 	public void editaPerfil(String idUser, String nome, String endereco,
 			String senha, String email)
-			throws InvalidAttributeIdentifierException {
+			throws InvalidAttributeIdentifierException, IOException {
 		this.usuarios.editaPerfil(idUser, nome, endereco, senha, email);
+		salvar();
 	}
 
-	public void addUserECaronas() {
+	public void addUserECaronas() throws IOException {
+		System.out.println("criando users");
 		FazUserECaronas.gerarUserECaronas(this);
+		salvar();
 	}
 
 	// public static void main(String[] args) {
@@ -236,4 +256,10 @@ public class ControllerGeral implements Serializable {
 	// PontoEncontro("A-B", usuario2.getIdUser(), carona1.getIdCarona()));
 	// teste.arquivo.cadastraSolicitacao(sol1);
 	// }
+
+	public void salvar() throws IOException {
+		Persistencia persistencia = new Persistencia("Projeto3.txt");
+		System.out.println("Passei no salvar");
+		persistencia.persistirDados(this);
+	}
 }

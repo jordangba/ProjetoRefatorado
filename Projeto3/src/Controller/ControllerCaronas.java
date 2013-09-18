@@ -32,11 +32,11 @@ public class ControllerCaronas implements Serializable{
 
 	private void verificaVagas(String vagas) {
 		if (vagas == null) {
-			throw new IllegalArgumentException("Vaga inválida");
+			throw new IllegalArgumentException("Vaga invï¿½lida");
 		}
 		if (vagas.isEmpty() || vagas.matches("[a-zA-Z]*")
 				|| Integer.parseInt(vagas) <= 0) {
-			throw new IllegalArgumentException("Vaga inválida");
+			throw new IllegalArgumentException("Vaga invï¿½lida");
 		}
 
 	}
@@ -77,7 +77,7 @@ public class ControllerCaronas implements Serializable{
 
 	private void verificaCarona(String idCarona) {
 		if (idCarona == null) {
-			throw new IllegalAccessError("Carona Inválida");
+			throw new IllegalAccessError("Carona Invï¿½lida");
 		} else if (idCarona.isEmpty()) {
 			throw new IllegalAccessError("Carona Inexistente");
 		} else if (!(this.caronaDoSistema.containsKey(idCarona))) {
@@ -87,7 +87,7 @@ public class ControllerCaronas implements Serializable{
 
 	private void verificaIdCarona(String idCarona) {
 		if (idCarona == null || idCarona.isEmpty()) {
-			throw new IllegalAccessError("Identificador do carona é inválido");
+			throw new IllegalAccessError("Identificador do carona ï¿½ invï¿½lido");
 		} else if (!(this.caronaDoSistema.containsKey(idCarona))) {
 			throw new IllegalAccessError("Item inexistente");
 		}
@@ -95,7 +95,7 @@ public class ControllerCaronas implements Serializable{
 
 	private void verificAtributo(String atributo) {
 		if (atributo == null || atributo.isEmpty()) {
-			throw new IllegalAccessError("Atributo inválido");
+			throw new IllegalAccessError("Atributo invï¿½lido");
 		}
 	}
 
@@ -114,7 +114,7 @@ public class ControllerCaronas implements Serializable{
 
 	private void verificaTrajeto(String idCarona) {
 		if (idCarona == null) {
-			throw new IllegalAccessError("Trajeto Inválida");
+			throw new IllegalAccessError("Trajeto Invï¿½lida");
 		} else if (idCarona.isEmpty()
 				|| !(this.caronaDoSistema.containsKey(idCarona))) {
 			throw new IllegalAccessError("Trajeto Inexistente");
@@ -124,7 +124,7 @@ public class ControllerCaronas implements Serializable{
 	private void verificaOrigem(String origem) {
 		if (origem == null
 				|| origem.matches("[\\-/.\\[_\\]()!\"+,:;<=>{|}#@$%ï¿½&*0-9].*")) {
-			throw new IllegalArgumentException("Origem inválida");
+			throw new IllegalArgumentException("Origem invï¿½lida");
 		}
 
 	}
@@ -132,7 +132,7 @@ public class ControllerCaronas implements Serializable{
 	private void verificaDestino(String destino) {
 		if (destino == null
 				|| destino.matches("[\\-/.\\[_\\]()!\"+,:;<=>{|}#@$%ï¿½&*0-9].*")) {
-			throw new IllegalArgumentException("Destino inválido");
+			throw new IllegalArgumentException("Destino invï¿½lido");
 		}
 
 	}

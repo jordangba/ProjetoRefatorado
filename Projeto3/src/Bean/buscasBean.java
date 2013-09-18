@@ -1,5 +1,6 @@
 package Bean;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,7 +103,7 @@ public class buscasBean {
 		}
 	}
 
-	public void addSolicitacao() {
+	public void addSolicitacao() throws IOException {
 		if (this.sugestaoLocal.isEmpty()) {
 			controller.solicitarVaga(idUser, caronaSelecionada.getIdCarona());
 		} else {

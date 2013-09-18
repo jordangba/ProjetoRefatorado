@@ -25,9 +25,11 @@ public class Persistencia {
 			out = new ObjectOutputStream(fos);
 			out.writeObject(controladora);
 			out.close();
+			System.out.println("Passei no persistir dados");
 		} catch (IOException e) {
+			System.out.println("deu errado");
 			System.err.println(e.getMessage());
-		}
+					}
 	}
 
 	public ControllerGeral lerDados(ControllerGeral controladora) throws IOException {

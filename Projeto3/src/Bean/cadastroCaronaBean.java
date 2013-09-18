@@ -1,5 +1,7 @@
 package Bean;
 
+import java.io.IOException;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -95,7 +97,7 @@ public class cadastroCaronaBean {
 		return "telaInicial.xhtml";
 	}
 
-	public String cadastra() {
+	public String cadastra() throws IOException {
 		try {
 			controller.cadastrarCarona(idUser, origem, destino, data, hora,
 					vagas);

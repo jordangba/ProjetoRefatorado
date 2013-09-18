@@ -1,5 +1,6 @@
 package Bean;
 
+import java.io.IOException;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -26,7 +27,8 @@ public class usuarioBean {
 	private List<Solicitacao> solicitadas;
 	private List<Solicitacao> aceitas;
 	private Solicitacao solicitacaoSelecionada;
-
+	private Solicitacao solicitadaSelecionada;
+	
 	public usuarioBean() {
 		iniciaBean();
 	}
@@ -120,6 +122,14 @@ public class usuarioBean {
 		return "Login.xhtml";
 	}
 
+	public Solicitacao getSolicitadaSelecionada() {
+		return solicitadaSelecionada;
+	}
+
+	public void setSolicitadaSelecionada(Solicitacao solicitadaSelecionada) {
+		this.solicitadaSelecionada = solicitadaSelecionada;
+	}
+
 	public String buscasCarona() {
 		mandaInfo();
 		return "buscaCarona.xhtml";
@@ -177,16 +187,21 @@ public class usuarioBean {
 		}
 	}
 
-	public void aceitar() {
+	public void aceitar() throws IOException {
 		controller.aceitarSolicitacao(this.idUser,
 				this.solicitacaoSelecionada.getIdSolicitacao());
 		this.aceitas = controller.montaListaDeSolicitacaoAceitas(idUser);
 		this.solicitacoes = controller.montaListaDeSolicitacaoRecebidas(idUser);
 	}
 
-	public void recusar() {
+	public void recusar() throws IOException {
 		controller.rejeitarSolicitacao(this.idUser,
 				this.solicitacaoSelecionada.getIdSolicitacao());
 		this.solicitacoes = controller.montaListaDeSolicitacaoRecebidas(idUser);
+	}
+	
+	public void desistir() throws IOException{
+		controller.desistirRequisicao(idUser, solicitadaSelecionada.getCarona().getIdCarona(), solicitadaSelecionada.getIdSolicitacao());
+		this.solicitadas = controller.montaListaDeSolicitacaoFeitas(idUser);
 	}
 }

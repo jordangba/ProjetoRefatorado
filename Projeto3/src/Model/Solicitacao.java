@@ -60,8 +60,6 @@ public class Solicitacao implements Serializable {
 			this.estado = estado.mudaEstadoAceitacao(this.estado);
 			donoDaSolicitacao.getSolicitacoesAceitas()
 					.add(idSolicitacao);
-			donoDaSolicitacao.getSolicitacoesFeitas().remove(idSolicitacao);
-			donoCarona.getSolicitacoesRecebidas().remove(idSolicitacao);
 		} else {
 			throw new IllegalComponentStateException("Solicita��o inexistente");
 		}
