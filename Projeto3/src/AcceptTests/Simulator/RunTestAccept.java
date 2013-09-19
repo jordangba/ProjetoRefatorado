@@ -16,6 +16,7 @@ public class RunTestAccept implements Serializable {
 		testCreateAcount();
 	}
 
+	
 	private static void testCreateAcount() {
 		List<String> files = new ArrayList<String>();
 
