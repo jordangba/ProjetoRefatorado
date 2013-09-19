@@ -231,6 +231,9 @@ public class ControllerGeral implements Serializable {
 		this.usuarios.editaPerfil(idUser, nome, endereco, senha, email);
 		salvar();
 	}
+public List<Solicitacao> fazerListaSolicitacoesConfirmadas(String idCarona){
+		return this.solicitacaoes.fazerListaSolicitacoesConfirmadas(this.caronas.getCaronaDoSistema().get(idCarona));
+	}
 
 	public void addUserECaronas() throws IOException {
 		System.out.println("criando users");
@@ -238,26 +241,7 @@ public class ControllerGeral implements Serializable {
 		salvar();
 	}
 
-	// public static void main(String[] args) {
-	// ControllerGeral teste = new ControllerGeral();
-	// Usuario usuario1 = new
-	// Usuario("Tulio5","Tulio5","Tulio5","Tulio5","Tulio5@email.com");
-	// Usuario usuario2 = new
-	// Usuario("Tulio2","Tulio2","Tulio2","Tulio2","Tulio2@email.com");
-	// teste.arquivo.cadastraUsuario(usuario1);
-	// teste.arquivo.cadastraUsuario(usuario2);
-	// Carona carona1 = new Carona(usuario1, "A", "B","22/12/2015", "20:20",
-	// 10);
-	// Carona carona2 = new Carona(usuario2, "C", "D","22/12/2015", "20:20",
-	// 10);
-	// teste.arquivo.cadastraCarona(carona1);
-	// teste.arquivo.cadastraCarona(carona2);
-	// Solicitacao sol1 = new Solicitacao(usuario1, carona1,new
-	// PontoEncontro("A-B", usuario2.getIdUser(), carona1.getIdCarona()));
-	// teste.arquivo.cadastraSolicitacao(sol1);
-	// }
-
-	public void salvar() throws IOException {
+		public void salvar() throws IOException {
 		Persistencia persistencia = new Persistencia("Projeto3.txt");
 		System.out.println("Passei no salvar");
 		persistencia.persistirDados(this);

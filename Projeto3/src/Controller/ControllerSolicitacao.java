@@ -101,5 +101,12 @@ public class ControllerSolicitacao implements Serializable {
 		}
 		return resultado;
 	}
+public List<Solicitacao> fazerListaSolicitacoesConfirmadas(Carona carona) {
+	List<Solicitacao> resultado = new ArrayList<Solicitacao>();
+	for (String solicitacao : carona.getSolicitacoesConfirmadas()) {
+		resultado.add(this.solicitacoesSistema.get(solicitacao));
+	}
+	return resultado;
+	}
 
 }

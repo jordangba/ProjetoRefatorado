@@ -22,6 +22,7 @@ public class Carona implements Serializable {
 	private String horaAtual = "";
 	private Usuario idUser;
 	private List<PontoEncontro> pontos;
+	private List<String> solicitacoesConfirmadas;
 
 	public Carona(Usuario idUser, String origem, String destino, String data,
 			String hora, int vagas) {
@@ -36,6 +37,7 @@ public class Carona implements Serializable {
 				+ Integer.toString(this.idUser.getCarona().size()));
 		checaHoraEData(data, hora);
 		pontos = new ArrayList<PontoEncontro>();
+		this.solicitacoesConfirmadas= new ArrayList<String>();
 		this.idUser.addCarona(this.idCarona);
 	}
 

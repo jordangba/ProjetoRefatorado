@@ -148,5 +148,22 @@ public class CreateAcountSimulator implements Serializable{
 		}
 		
 	}
+public String getTodasCaronasUsuario(String idUser){
+		return Adapter.ColecaoParaString(this.control.getUsuarios().getUsuarioSistema().get(idUser).getCarona());
+	}
+	public String getSolicitacoesConfirmadas(String idUser, String idCarona){
+		return Adapter.ColecaoParaString(this.control.getCaronas().getCaronaDoSistema().get(idCarona).getSolicitacoesConfirmadas());
+	
+	}
+	
+	public String getPontosSugeridos(String idUser, String idCarona){
+		return this.control.getCaronas().getCaronaDoSistema().get(idCarona).getPontos().toString();
+	}
+	public String getPontosEncontro(String idUser, String idCarona){
+		return this.control.getCaronas().getCaronaDoSistema().get(idCarona).getPontos().toString();
+	}
+	public String getSolicitacoesPendentes(String idUser, String idCarona){
+		return Adapter.ColecaoParaString(this.control.getUsuarios().getUsuarioSistema().get(idUser).getSolicitacoesFeitas());
+	}
 
 }
