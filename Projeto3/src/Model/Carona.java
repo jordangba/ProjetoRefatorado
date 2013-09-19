@@ -59,6 +59,14 @@ public class Carona implements Serializable {
 		return result;
 	}
 
+	public List<PontoEncontro> getPontos() {
+		return pontos;
+	}
+
+	public List<String> getSolicitacoesConfirmadas() {
+		return solicitacoesConfirmadas;
+	}
+
 	public void addPonto(PontoEncontro ponto) {
 		pontos.add(ponto);
 	}

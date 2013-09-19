@@ -236,14 +236,12 @@ public List<Solicitacao> fazerListaSolicitacoesConfirmadas(String idCarona){
 	}
 
 	public void addUserECaronas() throws IOException {
-		System.out.println("criando users");
 		FazUserECaronas.gerarUserECaronas(this);
 		salvar();
 	}
 
 		public void salvar() throws IOException {
 		Persistencia persistencia = new Persistencia("Projeto3.txt");
-		System.out.println("Passei no salvar");
 		persistencia.persistirDados(this);
 	}
 }

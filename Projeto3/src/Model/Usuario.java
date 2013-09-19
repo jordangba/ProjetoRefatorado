@@ -24,7 +24,7 @@ public class Usuario implements Serializable {
 	private int faltasEmCaronas = 0;
 	private int presencaEmCarona = 0;
 	private List<String> solicitacoesAceitas;
-	private List<String> amigos;
+	private List<String> listaCaronaAceitas;
 
 	public int getCaronasNaoFuncionou() {
 		return caronasNaoFuncionou;
@@ -73,13 +73,9 @@ public class Usuario implements Serializable {
 		carona = new ArrayList<String>();
 		solicitacoesRecebidas = new ArrayList<String>();
 		solicitacoesFeitas = new ArrayList<String>();
-		amigos = new ArrayList<String>();
+		this.listaCaronaAceitas  = new ArrayList<String>();
 		solicitacoesAceitas = new ArrayList<String>();
 
-	}
-
-	public void addAmigo(String idAmigo) {
-		this.amigos.add(idAmigo);
 	}
 
 	public void addSolocitacoesFeita(String idSolicitacao) {
@@ -179,9 +175,13 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
+	public List<String> getListaCaronaAceitas() {
+		return listaCaronaAceitas;
+	}
+
 	public void reviewVagaEmCarona(String idCarona, String review,
 			Usuario caroneiro) {
-		if (!(caroneiro.getSolicitacoesAceitas().contains(idCarona))) {
+		if (!(caroneiro.getListaCaronaAceitas().contains(idCarona))) {
 			throw new IllegalArgumentException(
 					"Usuário não possui vaga na carona.");
 		}
@@ -198,7 +198,7 @@ public class Usuario implements Serializable {
 	}
 
 	public void reviewCarona(String idCarona, String review, Usuario donoCarona) {
-		if (!(this.solicitacoesAceitas.contains(idCarona))) {
+		if (!(this.listaCaronaAceitas.contains(idCarona))) {
 			throw new IllegalArgumentException(
 					"Usuário não possui vaga na carona.");
 		} else if (review.equals("segura e tranquila")) {

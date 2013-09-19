@@ -158,7 +158,7 @@ public class ControllerUser implements Serializable {
 		if (atributo.equals("historico de caronas")) {
 			retorno = this.usuarioSistema.get(login).getCarona().toString();
 		} else if (atributo.equals("historico de vagas em caronas")) {
-			retorno = this.usuarioSistema.get(login).getSolicitacoesAceitas()
+			retorno = this.usuarioSistema.get(login).getListaCaronaAceitas()
 					.toString();
 		}
 		return retorno;
