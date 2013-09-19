@@ -26,8 +26,6 @@ public class editarPerfilBean {
 				.getExternalContext().getRequestMap().get("controller");
 		this.idUser = (String) FacesContext.getCurrentInstance()
 				.getExternalContext().getRequestMap().get("usuarioLogado");
-		System.out.println(controller);
-		System.out.println(idUser);
 
 		user = controller.buscaUsuarioPorId(idUser);
 

@@ -142,7 +142,6 @@ public class CreateAcountSimulator implements Serializable{
 		
 		try {
 			this.control = persistencia.lerDados(this.control);
-			System.out.println(control.getUsuarios().getUsuarioSistema().size());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

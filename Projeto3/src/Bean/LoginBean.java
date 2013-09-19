@@ -53,7 +53,6 @@ public class LoginBean {
 
 	public String logar() {
 		try {
-			System.out.println("Estou em logar");
 			compartilhaInfo(login, password);
 			limpa();
 			return "telaInicial.xhtml";
@@ -76,7 +75,6 @@ public class LoginBean {
 					.getExternalContext().getSessionMap().get("usuarioBean");
 			bean.iniciaBean();
 		}
-		System.out.println("Compartilhar info ok"); 
 
 	}
 
@@ -167,6 +165,5 @@ public class LoginBean {
 		this.senhaCadastro = "";
 		this.endereco = "";
 		this.email = "";
-		System.out.println("Limpa ok");
 	}
 }
