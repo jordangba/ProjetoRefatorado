@@ -100,7 +100,7 @@ public class Carona implements Serializable {
 				|| (origem
 						.matches("[\\-/.\\[_\\]()!\"+,:;<=>{|}#@$%ÔøΩ&*0-9].*"))
 				|| (origem.trim().equals(""))) {
-			throw new IllegalArgumentException("Origem inv·lida");
+			throw new IllegalArgumentException("Origem inv√°lida");
 		}
 	}
 
@@ -109,13 +109,13 @@ public class Carona implements Serializable {
 				|| (destino
 						.matches("[\\-/.\\[_\\]()!\"+,:;<=>{|}#@$%ÔøΩ&*0-9].*"))
 				|| (destino.trim().equals(""))) {
-			throw new IllegalArgumentException("Destino inv·lido");
+			throw new IllegalArgumentException("Destino inv√°lido");
 		}
 	}
 
 	private void verificaVagas(int vagas) {
 		if (vagas < 1) {
-			throw new IllegalArgumentException("Vaga inv·lida");
+			throw new IllegalArgumentException("Vaga inv√°lida");
 		}
 	}
 
@@ -186,23 +186,23 @@ public class Carona implements Serializable {
 
 	private void checaHoraInvalida(String hora) {
 		if (hora == null || hora.isEmpty() || hora.matches("[a-zA-Z]*")) {
-			throw new IllegalArgumentException("Hora inv·lida");
+			throw new IllegalArgumentException("Hora inv√°lida");
 		}
 		String[] listaHoraMinuto = hora.split(":");
 		try {
 			int horas = Integer.parseInt(listaHoraMinuto[0]);
 			int minutos = Integer.parseInt(listaHoraMinuto[1]);
 			if ((horas >= 24) || (minutos >= 60)) {
-				throw new IllegalArgumentException("Hora inv·lida");
+				throw new IllegalArgumentException("Hora invÔøΩlida");
 			}
 		} catch (Exception e) {
-			throw new IllegalArgumentException("Hora inv·lida");
+			throw new IllegalArgumentException("Hora inv√°lida");
 		}
 	}
 
 	private void checaData(String stringData) {
 		if (stringData == null || stringData.isEmpty()) {
-			throw new IllegalArgumentException("Data inv·lida");
+			throw new IllegalArgumentException("Data inv√°lida");
 		}
 
 		Calendar data = Calendar.getInstance();
@@ -211,21 +211,21 @@ public class Carona implements Serializable {
 			formato.setLenient(false);
 			data.setTime(formato.parse(stringData));
 		} catch (ParseException e) {
-			throw new IllegalArgumentException("Data inv·lida");
+			throw new IllegalArgumentException("Data inv√°lida");
 		}
 
 		Calendar dataAtual = Calendar.getInstance();
 		data.add(Calendar.HOUR_OF_DAY, 24);
 		data.add(Calendar.MINUTE, 59);
 		if (dataAtual.getTime().compareTo(data.getTime()) == 1) {
-			throw new IllegalArgumentException("Data inv·lida");
+			throw new IllegalArgumentException("Data inv√°lida");
 		}
 	}
 
 	private void checaHoraEData(String data, String hora) {
 		if (this.dataAtual.toString().compareTo(data.toString()) == 0) {
 			if (this.horaAtual.toString().compareTo(hora.toString()) > 0) {
-				throw new IllegalArgumentException("Hora inv·lida");
+				throw new IllegalArgumentException("Hora inv√°lida");
 			}
 		}
 	}

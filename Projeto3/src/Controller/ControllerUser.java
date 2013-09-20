@@ -40,16 +40,16 @@ public class ControllerUser implements Serializable {
 	private void verificaLoginESenha(String login, String senha) {
 		verificaLogin(login);
 		if (usuarioSistema.get(login).getSenha().equals(senha) == false) {
-			throw new IllegalAccessError("Login inv·lido");
+			throw new IllegalAccessError("Login inv√°lido");
 		}
 	}
 
 	private void verificaLogin(String login) throws IllegalAccessError {
 		if (login == null || login.isEmpty()) {
-			throw new IllegalAccessError("Login inv·lido");
+			throw new IllegalAccessError("Login inv√°lido");
 		}
 		if (!(usuarioSistema.containsKey(login))) {
-			throw new IllegalAccessError("Usu·rio inexistente");
+			throw new IllegalAccessError("Usu√°rio inexistente");
 		}
 	}
 
@@ -57,7 +57,7 @@ public class ControllerUser implements Serializable {
 			throws InvalidAttributeIdentifierException {
 		if (usuarioSistema.containsKey(login)) {
 			throw new InvalidAttributeIdentifierException(
-					"J· existe um usu·rio com este login");
+					"J√° existe um usu√°rio com este login");
 		}
 	}
 
@@ -75,7 +75,7 @@ public class ControllerUser implements Serializable {
 		for (Usuario user : usuarioSistema.values()) {
 			if (user.getEmail().equals(email)) {
 				throw new InvalidAttributeIdentifierException(
-						"J· existe um usu·rio com este email");
+						"J√° existe um usu√°rio com este email");
 			}
 
 		}
@@ -97,7 +97,7 @@ public class ControllerUser implements Serializable {
 		String retorno = "";
 		verificaLogin(login);
 		if (atributo == null || atributo.isEmpty()) {
-			throw new IllegalArgumentException("Atributo inv·lido");
+			throw new IllegalArgumentException("Atributo inv√°lido");
 		} else if (atributo.equals("nome")) {
 			retorno = this.usuarioSistema.get(login).getNome();
 		} else if (atributo.equals("endereco")) {
@@ -142,7 +142,7 @@ public class ControllerUser implements Serializable {
 		} else if (atributo.equals("caronas seguras e tranquilas")) {
 			retorno = Integer.toString(this.usuarioSistema.get(login)
 					.getCaronaSeguras());
-		} else if (atributo.equals("caronas que n„o funcionaram")) {
+		} else if (atributo.equals("caronas que n√£o funcionaram")) {
 			retorno = Integer.toString(this.usuarioSistema.get(login)
 					.getCaronasNaoFuncionou());
 		} else if (atributo.equals("faltas em vagas de caronas")) {
@@ -151,7 +151,7 @@ public class ControllerUser implements Serializable {
 					.getFaltasEmCaronas());
 		}
 
-		else if (atributo.equals("presenÁas em vagas de caronas")) {
+		else if (atributo.equals("presen√ßas em vagas de caronas")) {
 			retorno = Integer.toString(this.usuarioSistema.get(login)
 					.getPresencaEmCarona());
 		}

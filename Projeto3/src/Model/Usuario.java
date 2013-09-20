@@ -108,19 +108,19 @@ public class Usuario implements Serializable {
 
 	private void verificaNome(String nome) {
 		if (nome == null || nome.isEmpty()) {
-			throw new IllegalArgumentException("Nome inválido");
+			throw new IllegalArgumentException("Nome invÃ¡lido");
 		}
 	}
 
 	private void verificaLogin(String login) {
 		if (login == null || login.isEmpty()) {
-			throw new IllegalArgumentException("Login inválido");
+			throw new IllegalArgumentException("Login invÃ¡lido");
 		}
 	}
 
 	private void verificaEmail(String email) {
 		if (email == null || email.isEmpty()) {
-			throw new IllegalArgumentException("Email inválido");
+			throw new IllegalArgumentException("Email invÃ¡lido");
 		}
 	}
 
@@ -183,39 +183,39 @@ public class Usuario implements Serializable {
 			Usuario caroneiro) {
 		if (!(caroneiro.getListaCaronaAceitas().contains(idCarona))) {
 			throw new IllegalArgumentException(
-					"Usuário não possui vaga na carona.");
+					"UsuÃ¡rio nÃ£o possui vaga na carona.");
 		}
 
 		else if (review.equals("faltou")) {
 			caroneiro.setFaltasEmCaronas(caroneiro.getFaltasEmCaronas() + 1);
 		}
 
-		else if (review.equals("não faltou")) {
+		else if (review.equals("nÃ£o faltou")) {
 			caroneiro.setPresencaEmCarona(caroneiro.getPresencaEmCarona() + 1);
 		} else {
-			throw new IllegalArgumentException("Opção inválida.");
+			throw new IllegalArgumentException("OpÃ§Ã£o invÃ¡lida.");
 		}
 	}
 
 	public void reviewCarona(String idCarona, String review, Usuario donoCarona) {
 		if (!(this.listaCaronaAceitas.contains(idCarona))) {
 			throw new IllegalArgumentException(
-					"Usuário não possui vaga na carona.");
+					"UsuÃ¡rio nÃ£o possui vaga na carona.");
 		} else if (review.equals("segura e tranquila")) {
 			donoCarona.setCaronaSeguras(donoCarona.getCaronaSeguras() + 1);
-		} else if (review.equals("não funcionou")) {
+		} else if (review.equals("nÃ£o funcionou")) {
 			donoCarona.setCaronasNaoFuncionou(donoCarona
 					.getCaronasNaoFuncionou() + 1);
 
 		} else {
-			throw new IllegalArgumentException("Opção inválida.");
+			throw new IllegalArgumentException("OpÃ§Ã£o invÃ¡lida.");
 		}
 
 	}
 
 	public String visualizarPerfil(String login) {
 		if (login == null || login.isEmpty() || !(this.login.equals(login))) {
-			throw new IllegalAccessError("Login inválido");
+			throw new IllegalAccessError("Login invÃ¡lido");
 		}
 		return login;
 	}

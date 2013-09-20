@@ -185,9 +185,9 @@ public class ControllerGeral implements Serializable {
 
 	private void verificaSessao(String idUsuario) {
 		if (idUsuario == null || idUsuario.isEmpty()) {
-			throw new IllegalAccessError("Sess�o inv�lida");
+			throw new IllegalAccessError("Sessão inválida");
 		} else if (!(this.usuarios.getUsuarioSistema().containsKey(idUsuario))) {
-			throw new IllegalAccessError("Sess�o inexistente");
+			throw new IllegalAccessError("Sessão inexistente");
 		}
 	}
 

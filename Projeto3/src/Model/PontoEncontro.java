@@ -34,7 +34,7 @@ public class PontoEncontro implements Serializable {
 
 	private void verificaPonto(String ponto) {
 		if (ponto.isEmpty()) {
-			throw new IllegalArgumentException("Ponto Inv·lido");
+			throw new IllegalArgumentException("Ponto Inv√°lido");
 		}
 	}
 
